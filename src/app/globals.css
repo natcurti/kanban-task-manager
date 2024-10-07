@@ -5,7 +5,7 @@
   --medium-gray: #3a3e44;
   --light-gray: #7e878d;
   --red: #aa2e26;
-  ---blue: #3662e3;
+  --blue: #3662e3;
   --yellow: #c18d30;
   --green: #4ca154;
   --light-pink: #f9e3e2;
@@ -26,4 +26,5 @@ body {
   color: var(--white);
   font-family: var(--font-dm-sans);
   font-weight: 700;
+  display: flex;
 }

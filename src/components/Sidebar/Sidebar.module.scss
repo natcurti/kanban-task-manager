@@ -1,0 +1,46 @@
+.menu {
+  width: 4.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.75rem;
+
+  button {
+    border: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+}
+
+.container-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.btn-menu-hamburguer {
+  background-color: var(--dark-gray);
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.container-buttons-boards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+
+  button {
+    &:hover {
+      outline: 3px solid var(--blue);
+      outline-offset: 8px;
+    }
+  }
+}
+
+.btn-add-board {
+  background-color: transparent;
+}

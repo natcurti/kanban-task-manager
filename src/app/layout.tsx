@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import SideBar from "@/components/Sidebar";
 
 const font = DM_Sans({
   display: "swap",
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${font.variable}`}>
-      <body>{children}</body>
+      <body>
+        <SideBar />
+        {children}
+      </body>
     </html>
   );
 }
