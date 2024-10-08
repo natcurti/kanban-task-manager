@@ -26,5 +26,4 @@ body {
   color: var(--white);
   font-family: var(--font-dm-sans);
   font-weight: 700;
-  display: flex;
 }

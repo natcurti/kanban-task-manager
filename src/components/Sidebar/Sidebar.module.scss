@@ -1,9 +1,13 @@
 .menu {
+  position: absolute;
   width: 4.75rem;
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
-  align-items: center;
-  padding-top: 0.75rem;
+  padding: 0.75rem 0 0 1rem;
+  transition: width 0.7s ease-in;
+  background-color: var(--black);
+  z-index: 100;
 
   button {
     border: none;
@@ -12,6 +16,10 @@
     place-items: center;
     cursor: pointer;
   }
+}
+
+.menu-opened {
+  width: 18.5rem;
 }
 
 .container-buttons {
@@ -43,4 +51,6 @@
 
 .btn-add-board {
   background-color: transparent;
+  display: flex;
+  color: var(--white);
 }

@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
+    "classnames": "^2.5.1",
     "next": "14.2.14",
     "react": "^18",
     "react-dom": "^18",
+    "react-redux": "^9.1.2",
     "sass": "^1.79.4"
   },
   "devDependencies": {
