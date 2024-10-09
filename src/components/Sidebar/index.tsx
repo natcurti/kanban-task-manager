@@ -4,7 +4,8 @@ import styles from "./Sidebar.module.scss";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { AddBoardIcon, BoardLogoOne, CloseIcon, MenuIcon } from "../Icons";
 import { setIsOpen } from "@/store/reducers/navBar";
-import ButtonNavbar from "../ButtonNavbar";
+import SwitchMode from "../SwitchMode";
+import NavbarItem from "./NavbarItem";
 
 const Sidebar = () => {
   const isOpen = useAppSelector((store) => store.navBar);
@@ -22,14 +23,15 @@ const Sidebar = () => {
       >
         {isOpen ? <CloseIcon /> : <MenuIcon />}
       </button>
-      <div className={styles["container-buttons"]}>
-        <ButtonNavbar title="Default Board" isOpen={isOpen}>
+      <ul className={styles["container-buttons"]}>
+        <NavbarItem title="Default Board" isOpen={isOpen}>
           <BoardLogoOne />
-        </ButtonNavbar>
-        <ButtonNavbar title="Add new board" isOpen={isOpen}>
+        </NavbarItem>
+        <NavbarItem title="Add new board" isOpen={isOpen}>
           <AddBoardIcon />
-        </ButtonNavbar>
-      </div>
+        </NavbarItem>
+      </ul>
+      <SwitchMode />
     </nav>
   );
 };

@@ -1,0 +1,45 @@
+.item {
+  list-style: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    outline: 3px solid var(--blue);
+  }
+}
+
+.item-opened {
+  width: 100%;
+  border-radius: 2.813rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.title {
+  width: max-content;
+  position: absolute;
+  left: 10rem;
+  opacity: 0;
+  transition: 1s ease-in-out;
+}
+
+.title-opened {
+  opacity: 1;
+  left: 4rem;
+}

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import navBar from "./reducers/navBar";
+import navBarSlice from "./reducers/navBar";
+import colorModeSlice from "./reducers/colorMode";
 
 const store = configureStore({
   reducer: {
-    navBar,
+    navBar: navBarSlice,
+    colorMode: colorModeSlice,
   },
 });
 
