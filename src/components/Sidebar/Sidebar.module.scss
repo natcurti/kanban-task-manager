@@ -7,10 +7,17 @@
   min-height: 100vh;
   padding: 1rem;
   transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .navbar-opened {
   width: 18.5rem;
+}
+
+.light {
+  background-color: var(--white);
 }
 
 .btn-menu {
@@ -23,6 +30,10 @@
   place-items: center;
   cursor: pointer;
   margin-bottom: 2.25rem;
+}
+
+.btn-menu-light {
+  background-color: var(--light-blue);
 }
 
 .container-buttons {

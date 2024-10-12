@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import SideBar from "@/components/Sidebar";
 import ReduxProvider from "@/components/ReduxProvider";
+import BodyStyled from "@/components/BodyStyled";
 
 const font = DM_Sans({
   display: "swap",
@@ -24,10 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${font.variable}`}>
       <ReduxProvider>
-        <body>
+        <BodyStyled>
           <SideBar />
           {children}
-        </body>
+        </BodyStyled>
       </ReduxProvider>
     </html>
   );

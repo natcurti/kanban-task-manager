@@ -20,10 +20,3 @@
   font-size: 100%;
   font: inherit;
 }
-
-body {
-  background-color: var(--black);
-  color: var(--white);
-  font-family: var(--font-dm-sans);
-  font-weight: 700;
-}
