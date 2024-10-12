@@ -1,0 +1,9 @@
+.tasks-container {
+  margin-bottom: 1.25rem;
+
+  @media (min-width: 640px) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}

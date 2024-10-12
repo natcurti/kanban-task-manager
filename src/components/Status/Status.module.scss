@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.circle {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+
+.backlog {
+  background-color: #70a3f3;
+}
+
+.progress {
+  background-color: #f3ce49;
+}
+
+.review {
+  background-color: #b787f5;
+}
+
+.completed {
+  background-color: #77db89;
+}

@@ -1,0 +1,33 @@
+.backdrop-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.modal {
+  background-color: var(--dark-gray);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  position: relative;
+}
+
+.icon {
+  border: 3px solid transparent;
+  background-color: transparent;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  &:hover {
+    border-color: var(--blue);
+  }
+}

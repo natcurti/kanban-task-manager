@@ -2,13 +2,19 @@
 import { useAppSelector } from "@/store/hooks";
 import styles from "./MainContainer.module.scss";
 import classNames from "classnames";
+import Modal from "../Modal";
 
 interface IMainContainer {
   children: React.ReactNode;
 }
 
 const MainContainer = ({ children }: IMainContainer) => {
-  const theme = useAppSelector((store) => store.colorMode);
+  const { theme, isModalOpen } = useAppSelector((store) => {
+    return {
+      theme: store.colorMode,
+      isModalOpen: store.modal,
+    };
+  });
 
   return (
     <main
@@ -17,6 +23,7 @@ const MainContainer = ({ children }: IMainContainer) => {
       })}
     >
       {children}
+      {isModalOpen && <Modal>Meu Modal</Modal>}
     </main>
   );
 };

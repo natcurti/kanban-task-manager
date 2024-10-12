@@ -1,0 +1,23 @@
+.btn-add-task {
+  border: none;
+  background-color: var(--medium-blue);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--blue);
+  font-size: 0.875rem;
+  width: 14.25rem;
+  cursor: pointer;
+
+  &:hover {
+    outline: 3px solid var(--blue);
+  }
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+}
