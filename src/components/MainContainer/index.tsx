@@ -3,6 +3,7 @@ import { useAppSelector } from "@/store/hooks";
 import styles from "./MainContainer.module.scss";
 import classNames from "classnames";
 import Modal from "../Modal";
+import TaskCover from "../TaskCover";
 
 interface IMainContainer {
   children: React.ReactNode;
@@ -23,7 +24,11 @@ const MainContainer = ({ children }: IMainContainer) => {
       })}
     >
       {children}
-      {isModalOpen && <Modal>Meu Modal</Modal>}
+      {isModalOpen && (
+        <Modal title="Task Details">
+          <TaskCover />
+        </Modal>
+      )}
     </main>
   );
 };

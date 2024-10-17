@@ -14,6 +14,7 @@
   padding: 2rem;
   border-radius: 0.75rem;
   position: relative;
+  width: 32.5rem;
 }
 
 .icon {
@@ -23,11 +24,20 @@
   display: grid;
   place-items: center;
   cursor: pointer;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
 
   &:hover {
     border-color: var(--blue);
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.875rem;
+
+  p {
+    font-size: 1.25rem;
   }
 }

@@ -1,0 +1,46 @@
+.cover {
+  border-radius: 0.5rem;
+  height: 7.625rem;
+  width: 100%;
+  background-color: var(--medium-gray);
+  position: relative;
+
+  img {
+    border-radius: 0.5rem;
+    object-fit: cover;
+    height: 7.625rem;
+    width: 100%;
+  }
+}
+
+.container-buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+}
+
+.btn {
+  border: none;
+  border-radius: 3rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: var(--white);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.random {
+  background-color: var(--blue);
+}
+
+.remove {
+  background-color: var(--red);
+}
