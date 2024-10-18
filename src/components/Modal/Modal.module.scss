@@ -11,10 +11,14 @@
 
 .modal {
   background-color: var(--dark-gray);
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 0.75rem;
   position: relative;
-  width: 32.5rem;
+  width: 90%;
+
+  @media (min-width: 640px) {
+    width: 36rem;
+  }
 }
 
 .icon {
@@ -35,9 +39,9 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 1.875rem;
+  margin-bottom: 0.5rem;
 
   p {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }

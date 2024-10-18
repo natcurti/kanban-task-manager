@@ -1,4 +1,4 @@
-import styles from "../SharedStyles.module.scss";
+import sharedStyles from "../SharedStyles.module.scss";
 
 const InputName = ({
   title,
@@ -8,14 +8,14 @@ const InputName = ({
   placeholder: string;
 }) => {
   return (
-    <div className={styles.container}>
-      <label className={styles.title} id={title}>
+    <div className={sharedStyles.container}>
+      <label className={sharedStyles.title} id={title}>
         {title}
       </label>
       <input
         placeholder={placeholder}
         type="text"
-        className={styles.input}
+        className={sharedStyles.format}
         name={title}
       />
     </div>

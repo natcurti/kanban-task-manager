@@ -6,6 +6,7 @@ import Modal from "../Modal";
 import TaskCover from "../TaskCover";
 import InputName from "../ModalComponents/InputName";
 import SelectStatus from "../ModalComponents/SelectStatus";
+import SelectTags from "../ModalComponents/SelectTags";
 
 interface IMainContainer {
   children: React.ReactNode;
@@ -30,7 +31,8 @@ const MainContainer = ({ children }: IMainContainer) => {
         <Modal title="Task Details">
           <TaskCover />
           <InputName title="Task Name" placeholder="Task name here" />
-          <SelectStatus title="Status" />
+          <SelectStatus />
+          <SelectTags />
         </Modal>
       )}
     </main>

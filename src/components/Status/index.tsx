@@ -12,9 +12,12 @@ const Status = ({ title, quantity }: { title: string; quantity?: number }) => {
           [styles.completed]: title === "Completed",
         })}
       ></div>
-      <p>
-        {title} ({quantity})
-      </p>
+      <p>{title}</p>
+      <span
+        className={classNames({
+          [styles.hidden]: quantity === undefined,
+        })}
+      >{`(${quantity})`}</span>
     </section>
   );
 };

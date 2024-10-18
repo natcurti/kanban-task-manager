@@ -1,0 +1,16 @@
+.btn-tags {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.details {
+  gap: 0.25rem;
+  z-index: 100;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+}
