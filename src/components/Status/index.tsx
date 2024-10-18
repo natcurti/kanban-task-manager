@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import styles from "./Status.module.scss";
 
-const Status = ({ title, quantity }: { title: string; quantity: number }) => {
+const Status = ({ title, quantity }: { title: string; quantity?: number }) => {
   return (
     <section className={styles.container}>
       <div
