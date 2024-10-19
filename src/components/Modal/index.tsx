@@ -5,6 +5,7 @@ import styles from "./Modal.module.scss";
 import { setModalOpen } from "@/store/reducers/modal";
 import { useRef } from "react";
 import classNames from "classnames";
+import { createSelector } from "@reduxjs/toolkit";
 
 const Modal = ({
   title,
@@ -15,7 +16,12 @@ const Modal = ({
 }) => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
-  const theme = useAppSelector((store) => store.colorMode);
+  const theme = useAppSelector(
+    createSelector(
+      (store) => store.colorMode,
+      (colorMode) => ({ colorMode })
+    )
+  );
 
   const handleClickOverlay = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

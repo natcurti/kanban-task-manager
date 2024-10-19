@@ -1,0 +1,29 @@
+.btn {
+  border-radius: 2.5rem;
+  height: 2.5rem;
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.btn-save {
+  background-color: var(--blue);
+  border: none;
+
+  &:hover {
+    background-color: #5e8df5;
+  }
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 2px solid var(--light-gray);
+
+  &:hover {
+    border-color: var(--white);
+  }
+}

@@ -2,19 +2,29 @@
 import Status from "@/components/Status";
 import sharedStyles from "../SharedStyles.module.scss";
 import styles from "./SelectStatus.module.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
+import { createSelector } from "@reduxjs/toolkit";
+
+interface ISelectStatus {
+  status: string;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const statusOptions = ["Backlog", "In Progress", "In Review", "Completed"];
 
-const SelectStatus = () => {
+const SelectStatus = ({ status, setStatus }: ISelectStatus) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const theme = useAppSelector((store) => store.colorMode);
+  const theme = useAppSelector(
+    createSelector(
+      (store) => store.colorMode,
+      (colorMode) => ({ colorMode })
+    )
+  );
 
   const handleOption = (title: string) => {
-    setSelectedOption(title);
+    setStatus(title);
     setOptionsOpen(false);
   };
 
@@ -34,9 +44,9 @@ const SelectStatus = () => {
             [sharedStyles["format-light"]]: theme.colorMode === "light",
           })}
         >
-          {selectedOption ? (
+          {status !== "" ? (
             <span className={styles.selected}>
-              <Status title={selectedOption} />
+              <Status title={status} />
             </span>
           ) : (
             <span>Choose a status</span>

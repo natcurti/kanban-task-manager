@@ -29,15 +29,15 @@
     border: 3px solid var(--blue);
     outline: none;
   }
+
+  span {
+    color: var(--light-gray);
+  }
 }
 
 .format-light {
   border-color: var(--medium-blue);
   color: var(--black);
-
-  span {
-    color: var(--light-gray);
-  }
 }
 
 .wrapper {

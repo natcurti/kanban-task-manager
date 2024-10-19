@@ -2,9 +2,15 @@
 import classNames from "classnames";
 import styles from "./BodyStyled.module.scss";
 import { useAppSelector } from "@/store/hooks";
+import { createSelector } from "@reduxjs/toolkit";
 
 const BodyStyled = ({ children }: { children: React.ReactNode }) => {
-  const theme = useAppSelector((store) => store.colorMode);
+  const theme = useAppSelector(
+    createSelector(
+      (store) => store.colorMode,
+      (colorMode) => ({ colorMode })
+    )
+  );
 
   return (
     <body

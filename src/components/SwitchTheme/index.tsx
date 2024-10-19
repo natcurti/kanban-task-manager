@@ -4,13 +4,19 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { MoonIcon, SunIcon } from "../Icons";
 import { setColorMode } from "@/store/reducers/colorMode";
 import classNames from "classnames";
+import { createSelector } from "@reduxjs/toolkit";
 
 interface ISwitchTheme {
   isOpen: boolean;
 }
 
 const SwitchTheme = ({ isOpen }: ISwitchTheme) => {
-  const theme = useAppSelector((store) => store.colorMode);
+  const theme = useAppSelector(
+    createSelector(
+      (store) => store.colorMode,
+      (colorMode) => ({ colorMode })
+    )
+  );
   const dispatch = useAppDispatch();
 
   return (

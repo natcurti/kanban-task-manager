@@ -1,21 +1,31 @@
 "use client";
 import { getImage } from "@/actions/getImage";
 import styles from "./TaskCover.module.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
+import { createSelector } from "@reduxjs/toolkit";
 
-const TaskCover = () => {
+interface ITaskCover {
+  urlCover: string;
+  setUrlCover: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
   const [getCover, setGetCover] = useState(false);
-  const [url, setUrl] = useState("");
-  const theme = useAppSelector((store) => store.colorMode);
+  const theme = useAppSelector(
+    createSelector(
+      (store) => store.colorMode,
+      (colorMode) => ({ colorMode })
+    )
+  );
 
   useEffect(() => {
     const coverImg = async () => {
       const linkImage = await getImage();
       if (linkImage) {
-        setUrl(linkImage);
+        setUrlCover(linkImage);
       }
     };
 
@@ -23,10 +33,10 @@ const TaskCover = () => {
       coverImg();
       setGetCover(false);
     }
-  }, [getCover]);
+  }, [getCover, setUrlCover]);
 
   const removeCover = () => {
-    setUrl("");
+    setUrlCover("");
   };
 
   return (
@@ -35,7 +45,9 @@ const TaskCover = () => {
         [styles["cover-light"]]: theme.colorMode === "light",
       })}
     >
-      {url && <Image src={url} alt="Task Cover Random Image" fill={true} />}
+      {urlCover && (
+        <Image src={urlCover} alt="Task Cover Random Image" fill={true} />
+      )}
       <div className={styles["container-buttons"]}>
         <button
           className={`${styles.btn} ${styles.random}`}

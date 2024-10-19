@@ -6,14 +6,19 @@ import { AddBoardIcon, BoardLogoOne, CloseIcon, MenuIcon } from "../Icons";
 import { setIsOpen } from "@/store/reducers/navBar";
 import NavbarItem from "./NavbarItem";
 import SwitchTheme from "../SwitchTheme";
+import { createSelector } from "@reduxjs/toolkit";
 
 const Sidebar = () => {
-  const { isOpen, theme } = useAppSelector((store) => {
-    return {
-      isOpen: store.navBar,
-      theme: store.colorMode,
-    };
-  });
+  const { isOpen, theme } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        isOpen: store.navBar,
+        theme: store.colorMode,
+      })
+    )
+  );
+
   const dispatch = useAppDispatch();
 
   return (
