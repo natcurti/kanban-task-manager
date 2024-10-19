@@ -21,6 +21,10 @@
   }
 }
 
+.modal-light {
+  background-color: var(--white);
+}
+
 .icon {
   border: 3px solid transparent;
   background-color: transparent;
@@ -44,4 +48,8 @@
   p {
     font-size: 1rem;
   }
+}
+
+.title-light {
+  color: var(--blue);
 }

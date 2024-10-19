@@ -218,7 +218,7 @@ export const AddTaskIcon = () => {
   );
 };
 
-export const CloseModal = () => {
+export const CloseModal = ({ colorMode }: { colorMode: string }) => {
   return (
     <svg
       width="24"
@@ -229,14 +229,14 @@ export const CloseModal = () => {
     >
       <path
         d="M18 6L6 18"
-        stroke="#FEF7EE"
+        stroke={colorMode === "dark" ? "#FEF7EE" : "#3662e3"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M6 6L18 18"
-        stroke="#FEF7EE"
+        stroke={colorMode === "dark" ? "#FEF7EE" : "#3662e3"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

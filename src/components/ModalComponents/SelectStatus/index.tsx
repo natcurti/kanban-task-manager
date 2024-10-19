@@ -3,12 +3,15 @@ import Status from "@/components/Status";
 import sharedStyles from "../SharedStyles.module.scss";
 import styles from "./SelectStatus.module.scss";
 import { useState } from "react";
+import { useAppSelector } from "@/store/hooks";
+import classNames from "classnames";
 
 const statusOptions = ["Backlog", "In Progress", "In Review", "Completed"];
 
 const SelectStatus = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const theme = useAppSelector((store) => store.colorMode);
 
   const handleOption = (title: string) => {
     setSelectedOption(title);
@@ -17,11 +20,19 @@ const SelectStatus = () => {
 
   return (
     <div className={sharedStyles.container}>
-      <p className={sharedStyles.title}>Status</p>
+      <p
+        className={classNames(sharedStyles.title, {
+          [sharedStyles["title-light"]]: theme.colorMode === "light",
+        })}
+      >
+        Status
+      </p>
       <div className={sharedStyles.wrapper}>
         <button
           onClick={() => setOptionsOpen(!optionsOpen)}
-          className={`${sharedStyles.format} ${styles["btn-status"]}`}
+          className={classNames(sharedStyles.format, styles["btn-status"], {
+            [sharedStyles["format-light"]]: theme.colorMode === "light",
+          })}
         >
           {selectedOption ? (
             <span className={styles.selected}>
@@ -33,7 +44,14 @@ const SelectStatus = () => {
         </button>
         {optionsOpen && (
           <div
-            className={`${sharedStyles["container-options"]} ${styles.details}`}
+            className={classNames(
+              sharedStyles["container-options"],
+              styles.details,
+              {
+                [sharedStyles["container-options-light"]]:
+                  theme.colorMode === "light",
+              }
+            )}
           >
             {statusOptions.map((status) => (
               <button

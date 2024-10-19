@@ -11,6 +11,10 @@
   margin-bottom: 0.25rem;
 }
 
+.title-light {
+  color: var(--blue);
+}
+
 .format {
   background-color: transparent;
   border: 3px solid var(--medium-gray);
@@ -24,6 +28,15 @@
   &:hover {
     border: 3px solid var(--blue);
     outline: none;
+  }
+}
+
+.format-light {
+  border-color: var(--medium-blue);
+  color: var(--black);
+
+  span {
+    color: var(--light-gray);
   }
 }
 
@@ -41,4 +54,8 @@
   background-color: var(--black);
   border-radius: 0.75rem;
   padding: 0.5rem;
+}
+
+.container-options-light {
+  background-color: var(--medium-blue);
 }

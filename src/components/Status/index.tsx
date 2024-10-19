@@ -1,7 +1,11 @@
+"use client";
 import classNames from "classnames";
 import styles from "./Status.module.scss";
+import { useAppSelector } from "@/store/hooks";
 
 const Status = ({ title, quantity }: { title: string; quantity?: number }) => {
+  const theme = useAppSelector((store) => store.colorMode);
+
   return (
     <section className={styles.container}>
       <div
@@ -12,7 +16,13 @@ const Status = ({ title, quantity }: { title: string; quantity?: number }) => {
           [styles.completed]: title === "Completed",
         })}
       ></div>
-      <p>{title}</p>
+      <p
+        className={classNames({
+          [styles["title-light"]]: theme.colorMode === "light",
+        })}
+      >
+        {title}
+      </p>
       <span
         className={classNames({
           [styles.hidden]: quantity === undefined,

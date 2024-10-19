@@ -1,4 +1,7 @@
+"use client";
+import { useAppSelector } from "@/store/hooks";
 import sharedStyles from "../SharedStyles.module.scss";
+import classNames from "classnames";
 
 const InputName = ({
   title,
@@ -7,15 +10,24 @@ const InputName = ({
   title: string;
   placeholder: string;
 }) => {
+  const theme = useAppSelector((store) => store.colorMode);
+
   return (
     <div className={sharedStyles.container}>
-      <label className={sharedStyles.title} id={title}>
+      <label
+        className={classNames(sharedStyles.title, {
+          [sharedStyles["title-light"]]: theme.colorMode === "light",
+        })}
+        id={title}
+      >
         {title}
       </label>
       <input
         placeholder={placeholder}
         type="text"
-        className={sharedStyles.format}
+        className={classNames(sharedStyles.format, {
+          [sharedStyles["format-light"]]: theme.colorMode === "light",
+        })}
         name={title}
       />
     </div>
