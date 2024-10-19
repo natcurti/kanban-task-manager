@@ -4,16 +4,17 @@ import colorModeSlice from "./reducers/colorMode";
 import modalSlice from "./reducers/modal";
 import tasksSlice from "./reducers/tasks";
 
-const store = configureStore({
-  reducer: {
-    navBar: navBarSlice,
-    colorMode: colorModeSlice,
-    modal: modalSlice,
-    tasks: tasksSlice,
-  },
-});
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      navBar: navBarSlice,
+      colorMode: colorModeSlice,
+      modal: modalSlice,
+      tasks: tasksSlice,
+    },
+  });
+};
 
-export type IRootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-export default store;
+export type AppStore = ReturnType<typeof makeStore>;
+export type IRootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
