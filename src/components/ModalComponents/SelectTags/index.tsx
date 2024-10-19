@@ -5,7 +5,6 @@ import styles from "./SelectTags.module.scss";
 import React, { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
-import { createSelector } from "@reduxjs/toolkit";
 
 interface ISelectTags {
   selectedTags: string[];
@@ -16,12 +15,7 @@ const optionsTags = ["concept", "technical", "design", "front-end"];
 
 const SelectTags = ({ selectedTags, setSelectedTags }: ISelectTags) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const theme = useAppSelector(
-    createSelector(
-      (store) => store.colorMode,
-      (colorMode) => ({ colorMode })
-    )
-  );
+  const theme = useAppSelector((store) => store.colorMode);
 
   const handleSelectTag = (tag: string) => {
     const isSelected = selectedTags.find((selectedTag) => selectedTag === tag);

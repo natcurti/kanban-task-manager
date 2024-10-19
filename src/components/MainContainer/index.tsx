@@ -19,13 +19,6 @@ interface IMainContainer {
 }
 
 const MainContainer = ({ children }: IMainContainer) => {
-  // const { theme, isModalOpen } = useAppSelector((store) => {
-  //   return {
-  //     theme: store.colorMode,
-  //     isModalOpen: store.modal,
-  //   };
-  // });
-
   const { theme, isModalOpen } = useAppSelector(
     createSelector(
       (store) => store,
@@ -54,6 +47,10 @@ const MainContainer = ({ children }: IMainContainer) => {
     );
 
     dispatch(setModalOpen());
+    setUrlCover("");
+    setTaskName("");
+    setStatus("");
+    setSelectedTags([]);
   };
 
   const cancelTask = () => {

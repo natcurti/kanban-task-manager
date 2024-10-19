@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
-import { createSelector } from "@reduxjs/toolkit";
 
 interface ITaskCover {
   urlCover: string;
@@ -14,12 +13,7 @@ interface ITaskCover {
 
 const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
   const [getCover, setGetCover] = useState(false);
-  const theme = useAppSelector(
-    createSelector(
-      (store) => store.colorMode,
-      (colorMode) => ({ colorMode })
-    )
-  );
+  const theme = useAppSelector((store) => store.colorMode);
 
   useEffect(() => {
     const coverImg = async () => {

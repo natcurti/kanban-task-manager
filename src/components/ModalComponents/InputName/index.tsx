@@ -2,7 +2,6 @@
 import { useAppSelector } from "@/store/hooks";
 import sharedStyles from "../SharedStyles.module.scss";
 import classNames from "classnames";
-import { createSelector } from "@reduxjs/toolkit";
 
 interface IInputName {
   title: string;
@@ -17,12 +16,7 @@ const InputName = ({
   taskName,
   setTaskName,
 }: IInputName) => {
-  const theme = useAppSelector(
-    createSelector(
-      (store) => store.colorMode,
-      (colorMode) => ({ colorMode })
-    )
-  );
+  const theme = useAppSelector((store) => store.colorMode);
 
   return (
     <div className={sharedStyles.container}>

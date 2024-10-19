@@ -5,7 +5,6 @@ import styles from "./SelectStatus.module.scss";
 import React, { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
-import { createSelector } from "@reduxjs/toolkit";
 
 interface ISelectStatus {
   status: string;
@@ -16,12 +15,7 @@ const statusOptions = ["Backlog", "In Progress", "In Review", "Completed"];
 
 const SelectStatus = ({ status, setStatus }: ISelectStatus) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const theme = useAppSelector(
-    createSelector(
-      (store) => store.colorMode,
-      (colorMode) => ({ colorMode })
-    )
-  );
+  const theme = useAppSelector((store) => store.colorMode);
 
   const handleOption = (title: string) => {
     setStatus(title);

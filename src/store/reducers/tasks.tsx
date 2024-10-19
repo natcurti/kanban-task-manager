@@ -8,7 +8,7 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, { payload }) => {
-      console.log(state, payload);
+      state.push(payload);
     },
   },
 });

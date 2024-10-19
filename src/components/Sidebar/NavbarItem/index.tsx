@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./NavbarItem.module.scss";
 import classNames from "classnames";
 import { useAppSelector } from "@/store/hooks";
-import { createSelector } from "@reduxjs/toolkit";
 
 interface INavbarItem {
   title: string;
@@ -11,12 +10,7 @@ interface INavbarItem {
 }
 
 const NavbarItem = ({ title, isOpen, children }: INavbarItem) => {
-  const theme = useAppSelector(
-    createSelector(
-      (store) => store.colorMode,
-      (colorMode) => ({ colorMode })
-    )
-  );
+  const theme = useAppSelector((store) => store.colorMode);
 
   return (
     <li
