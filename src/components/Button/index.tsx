@@ -1,6 +1,8 @@
 import { ButtonType } from "@/types/buttonType";
 import styles from "./Button.module.scss";
 import { DoneIcon } from "../Icons";
+import { useAppSelector } from "@/store/hooks";
+import classNames from "classnames";
 
 interface IButton {
   title: string;
@@ -9,6 +11,8 @@ interface IButton {
 }
 
 const Button = ({ title, type, onClick }: IButton) => {
+  const theme = useAppSelector((store) => store.colorMode);
+
   if (type === ButtonType.save) {
     return (
       <button
@@ -22,7 +26,10 @@ const Button = ({ title, type, onClick }: IButton) => {
   } else {
     return (
       <button
-        className={`${styles.btn} ${styles["btn-cancel"]}`}
+        className={classNames(styles.btn, {
+          [styles["btn-cancel"]]: theme.colorMode === "dark",
+          [styles["btn-cancel-light"]]: theme.colorMode === "light",
+        })}
         onClick={onClick}
       >
         {title}

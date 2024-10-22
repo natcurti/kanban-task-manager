@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import navBarSlice from "./reducers/navBar";
 import colorModeSlice from "./reducers/colorMode";
-import modalSlice from "./reducers/modal";
+import modalTaskSlice from "./reducers/modalTask";
+import modalBoardSlice from "./reducers/modalBoard";
 import tasksSlice from "./reducers/tasks";
 
 export const makeStore = () => {
@@ -9,7 +10,8 @@ export const makeStore = () => {
     reducer: {
       navBar: navBarSlice,
       colorMode: colorModeSlice,
-      modal: modalSlice,
+      modalTask: modalTaskSlice,
+      modalBoard: modalBoardSlice,
       tasks: tasksSlice,
     },
   });

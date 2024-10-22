@@ -10,9 +10,10 @@ import SelectTags from "../ModalComponents/SelectTags";
 import { useState } from "react";
 import Button from "../Button";
 import { ButtonType } from "@/types/buttonType";
-import { setModalOpen } from "@/store/reducers/modal";
 import { addTask } from "@/store/reducers/tasks";
 import { createSelector } from "@reduxjs/toolkit";
+import { setModalTaskOpen } from "@/store/reducers/modalTask";
+import { ModalType } from "@/types/modalType";
 
 interface IMainContainer {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ const MainContainer = ({ children }: IMainContainer) => {
       (store) => store,
       (store) => ({
         theme: store.colorMode,
-        isModalOpen: store.modal,
+        isModalOpen: store.modalTask,
       })
     )
   );
@@ -46,7 +47,7 @@ const MainContainer = ({ children }: IMainContainer) => {
       })
     );
 
-    dispatch(setModalOpen());
+    dispatch(setModalTaskOpen());
     setUrlCover("");
     setTaskName("");
     setStatus("");
@@ -54,7 +55,7 @@ const MainContainer = ({ children }: IMainContainer) => {
   };
 
   const cancelTask = () => {
-    dispatch(setModalOpen());
+    dispatch(setModalTaskOpen());
   };
 
   return (
@@ -65,13 +66,13 @@ const MainContainer = ({ children }: IMainContainer) => {
     >
       {children}
       {isModalOpen && (
-        <Modal title="Task Details">
+        <Modal title="Task Details" type={ModalType.newTask}>
           <TaskCover urlCover={urlCover} setUrlCover={setUrlCover} />
           <InputName
             title="Task Name"
             placeholder="Task name here"
-            taskName={taskName}
-            setTaskName={setTaskName}
+            name={taskName}
+            setName={setTaskName}
           />
           <SelectStatus status={status} setStatus={setStatus} />
           <SelectTags

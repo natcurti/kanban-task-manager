@@ -7,9 +7,10 @@ interface INavbarItem {
   title: string;
   isOpen: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-const NavbarItem = ({ title, isOpen, children }: INavbarItem) => {
+const NavbarItem = ({ title, isOpen, children, onClick }: INavbarItem) => {
   const theme = useAppSelector((store) => store.colorMode);
 
   return (
@@ -17,6 +18,7 @@ const NavbarItem = ({ title, isOpen, children }: INavbarItem) => {
       className={classNames(styles.item, {
         [styles["item-opened"]]: isOpen,
       })}
+      onClick={onClick}
     >
       <Link
         href=""

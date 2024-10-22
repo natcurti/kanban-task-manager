@@ -19,11 +19,25 @@
   }
 }
 
-.btn-cancel {
+.btn-cancel,
+.btn-cancel-light {
   background-color: transparent;
+}
+
+.btn-cancel {
   border: 2px solid var(--light-gray);
 
   &:hover {
     border-color: var(--white);
+  }
+}
+
+.btn-cancel-light {
+  border: 2px solid var(--blue);
+  color: var(--blue);
+
+  &:hover {
+    border-color: var(--light-gray);
+    color: var(--light-gray);
   }
 }

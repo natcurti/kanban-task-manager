@@ -2,7 +2,7 @@
 import { useAppDispatch } from "@/store/hooks";
 import { AddTaskIcon } from "../Icons";
 import styles from "./AddNewTask.module.scss";
-import { setModalOpen } from "@/store/reducers/modal";
+import { setModalTaskOpen } from "@/store/reducers/modalTask";
 
 const AddNewTask = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ const AddNewTask = () => {
   return (
     <button
       className={styles["btn-add-task"]}
-      onClick={() => dispatch(setModalOpen())}
+      onClick={() => dispatch(setModalTaskOpen())}
     >
       Add new task card
       <span className={styles.icon}>

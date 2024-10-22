@@ -6,16 +6,11 @@ import classNames from "classnames";
 interface IInputName {
   title: string;
   placeholder: string;
-  taskName: string;
-  setTaskName: React.Dispatch<React.SetStateAction<string>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputName = ({
-  title,
-  placeholder,
-  taskName,
-  setTaskName,
-}: IInputName) => {
+const InputName = ({ title, placeholder, name, setName }: IInputName) => {
   const theme = useAppSelector((store) => store.colorMode);
 
   return (
@@ -29,8 +24,8 @@ const InputName = ({
         {title}
       </label>
       <input
-        value={taskName}
-        onChange={(e) => setTaskName(e.target.value)}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         placeholder={placeholder}
         type="text"
         className={classNames(sharedStyles.format, {

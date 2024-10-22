@@ -2,17 +2,19 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { CloseModal } from "../Icons";
 import styles from "./Modal.module.scss";
-import { setModalOpen } from "@/store/reducers/modal";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import classNames from "classnames";
+import { setModalTaskOpen } from "@/store/reducers/modalTask";
+import { ModalType } from "@/types/modalType";
+import { setModalBoardOpen } from "@/store/reducers/modalBoard";
 
-const Modal = ({
-  title,
-  children,
-}: {
+interface IModal {
   title: string;
   children: React.ReactNode;
-}) => {
+  type: ModalType;
+}
+
+const Modal = ({ title, children, type }: IModal) => {
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
   const theme = useAppSelector((store) => store.colorMode);
@@ -21,9 +23,21 @@ const Modal = ({
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (e.target === overlayRef.current) {
-      dispatch(setModalOpen());
+      if (type === ModalType.newTask) {
+        dispatch(setModalTaskOpen());
+      } else {
+        dispatch(setModalBoardOpen());
+      }
     } else {
       e.stopPropagation();
+    }
+  };
+
+  const handleCloseModal = () => {
+    if (type === ModalType.newTask) {
+      dispatch(setModalTaskOpen());
+    } else {
+      dispatch(setModalBoardOpen());
     }
   };
 
@@ -44,10 +58,7 @@ const Modal = ({
           })}
         >
           <p>{title}</p>
-          <button
-            className={styles.icon}
-            onClick={() => dispatch(setModalOpen())}
-          >
+          <button className={styles.icon} onClick={handleCloseModal}>
             <CloseModal colorMode={theme.colorMode} />
           </button>
         </div>
