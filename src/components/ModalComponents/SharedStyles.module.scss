@@ -29,10 +29,10 @@
     border: 3px solid var(--blue);
     outline: none;
   }
+}
 
-  span {
-    color: var(--light-gray);
-  }
+.default-text {
+  color: var(--light-gray);
 }
 
 .format-light {

@@ -52,7 +52,9 @@ const SelectTags = ({ selectedTags, setSelectedTags }: ISelectTags) => {
               ))}
             </span>
           ) : (
-            <span>Choose your tags</span>
+            <span className={sharedStyles["default-text"]}>
+              Choose your tags
+            </span>
           )}
         </button>
         {optionsOpen && (

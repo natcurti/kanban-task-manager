@@ -4,8 +4,9 @@
   border-radius: 0.5rem;
   padding: 0.25rem;
   font-size: 0.85rem;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .large {

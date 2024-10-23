@@ -43,7 +43,9 @@ const SelectStatus = ({ status, setStatus }: ISelectStatus) => {
               <Status title={status} />
             </span>
           ) : (
-            <span>Choose a status</span>
+            <span className={sharedStyles["default-text"]}>
+              Choose a status
+            </span>
           )}
         </button>
         {optionsOpen && (
