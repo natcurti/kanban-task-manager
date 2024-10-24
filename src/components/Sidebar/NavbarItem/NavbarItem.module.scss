@@ -25,14 +25,19 @@
   border-radius: 2.813rem;
 }
 
-.link {
+.link,
+.addBoard {
   display: flex;
   align-items: center;
-  text-decoration: none;
   color: var(--white);
 }
 
-.link-light {
+.link {
+  text-decoration: none;
+}
+
+.link-light,
+.addBoard-light {
   color: var(--black);
 }
 

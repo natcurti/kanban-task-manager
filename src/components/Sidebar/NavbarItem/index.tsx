@@ -31,21 +31,38 @@ const NavbarItem = ({
       })}
       onClick={onClick}
     >
-      <Link
-        href={`/${href ?? ""}`}
-        className={classNames(styles.link, {
-          [styles["link-light"]]: theme.colorMode === "light",
-        })}
-      >
-        <span className={styles.icon}>{children}</span>
-        <span
-          className={classNames(styles.title, {
-            [styles["title-opened"]]: isOpen,
+      {href ? (
+        <Link
+          href={`/${href}`}
+          className={classNames(styles.link, {
+            [styles["link-light"]]: theme.colorMode === "light",
           })}
         >
-          {title}
-        </span>
-      </Link>
+          <span className={styles.icon}>{children}</span>
+          <span
+            className={classNames(styles.title, {
+              [styles["title-opened"]]: isOpen,
+            })}
+          >
+            {title}
+          </span>
+        </Link>
+      ) : (
+        <div
+          className={classNames(styles.addBoard, {
+            [styles["addBoard-light"]]: theme.colorMode === "light",
+          })}
+        >
+          <span className={styles.icon}>{children}</span>
+          <span
+            className={classNames(styles.title, {
+              [styles["title-opened"]]: isOpen,
+            })}
+          >
+            {title}
+          </span>
+        </div>
+      )}
     </li>
   );
 };
