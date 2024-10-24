@@ -12,6 +12,14 @@
   }
 }
 
+.active {
+  outline: 3px solid var(--light-gray);
+}
+
+.active-light {
+  outline: 3px solid var(--medium-blue);
+}
+
 .item-opened {
   width: 100%;
   border-radius: 2.813rem;

@@ -7,21 +7,32 @@ interface INavbarItem {
   title: string;
   isOpen: boolean;
   children: React.ReactNode;
+  href?: string;
+  isActive?: boolean;
   onClick?: () => void;
 }
 
-const NavbarItem = ({ title, isOpen, children, onClick }: INavbarItem) => {
+const NavbarItem = ({
+  title,
+  isOpen,
+  isActive,
+  children,
+  href,
+  onClick,
+}: INavbarItem) => {
   const theme = useAppSelector((store) => store.colorMode);
 
   return (
     <li
       className={classNames(styles.item, {
         [styles["item-opened"]]: isOpen,
+        [styles.active]: isActive,
+        [styles["active-light"]]: isActive && theme.colorMode === "light",
       })}
       onClick={onClick}
     >
       <Link
-        href=""
+        href={`/${href ?? ""}`}
         className={classNames(styles.link, {
           [styles["link-light"]]: theme.colorMode === "light",
         })}

@@ -5,7 +5,7 @@ import styles from "./Modal.module.scss";
 import React, { useRef } from "react";
 import classNames from "classnames";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
-import { ModalType } from "@/types/modalType";
+import { ModalType } from "@/types/ModalType";
 import { setModalBoardOpen } from "@/store/reducers/modalBoard";
 
 interface IModal {

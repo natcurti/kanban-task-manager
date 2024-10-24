@@ -9,11 +9,11 @@ import SelectStatus from "../ModalComponents/SelectStatus";
 import SelectTags from "../ModalComponents/SelectTags";
 import { useState } from "react";
 import Button from "../Button";
-import { ButtonType } from "@/types/buttonType";
+import { ButtonType } from "@/types/ButtonType";
 import { addTask } from "@/store/reducers/tasks";
 import { createSelector } from "@reduxjs/toolkit";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
-import { ModalType } from "@/types/modalType";
+import { ModalType } from "@/types/ModalType";
 
 interface IMainContainer {
   children: React.ReactNode;

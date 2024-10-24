@@ -11,9 +11,16 @@
     width: 1.25rem;
     height: 1.25rem;
   }
+}
 
+.hover {
   &:hover {
     outline-offset: 0.25rem;
     outline: 3px solid var(--blue);
   }
+}
+
+.selected {
+  outline-offset: 0.25rem;
+  outline: 3px solid var(--blue);
 }

@@ -4,6 +4,7 @@ import colorModeSlice from "./reducers/colorMode";
 import modalTaskSlice from "./reducers/modalTask";
 import modalBoardSlice from "./reducers/modalBoard";
 import tasksSlice from "./reducers/tasks";
+import boardsSlice from "./reducers/boards";
 
 export const makeStore = () => {
   return configureStore({
@@ -13,6 +14,7 @@ export const makeStore = () => {
       modalTask: modalTaskSlice,
       modalBoard: modalBoardSlice,
       tasks: tasksSlice,
+      boards: boardsSlice,
     },
   });
 };

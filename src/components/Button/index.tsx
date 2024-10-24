@@ -1,4 +1,4 @@
-import { ButtonType } from "@/types/buttonType";
+import { ButtonType } from "@/types/ButtonType";
 import styles from "./Button.module.scss";
 import { DoneIcon } from "../Icons";
 import { useAppSelector } from "@/store/hooks";
