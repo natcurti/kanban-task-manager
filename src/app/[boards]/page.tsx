@@ -6,14 +6,32 @@ import BacklogSection from "@/components/BacklogSection";
 import CompletedSection from "@/components/CompletedSection";
 import ReviewSection from "@/components/ReviewSection";
 import ProgressSection from "@/components/ProgressSection";
+import { useAppSelector } from "@/store/hooks";
+import { createSelector } from "@reduxjs/toolkit";
+import { IBoard } from "@/types/IBoard";
 
-export default function Board({ params }: { params: string }) {
-  console.log(params);
+interface IBoardParams {
+  params: {
+    boards: string;
+  };
+}
+
+export default function Board({ params }: IBoardParams) {
+  const { activeBoard } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        activeBoard: store.boards.filter(
+          (board: IBoard) => board.slug === params.boards
+        ),
+      })
+    )
+  );
 
   return (
     <MainContainer>
       <section className={styles["tasks-container"]}>
-        <BacklogSection />
+        <BacklogSection boardId={activeBoard[0].id} />
         <ProgressSection />
         <ReviewSection />
         <CompletedSection />

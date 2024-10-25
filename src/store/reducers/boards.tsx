@@ -1,11 +1,10 @@
 import { IBoard } from "@/types/IBoard";
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
 const initialState: IBoard[] = [
   {
     name: "Default Board",
-    id: uuidv4(),
+    id: "1",
     slug: "default-board",
     icon: "/assets/books.png",
     isActive: true,

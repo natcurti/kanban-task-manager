@@ -24,27 +24,27 @@ const logos = [
   {
     color: "#F8D8B0",
     src: "/assets/books.png",
-    id: 1,
+    id: "1",
   },
   {
     color: "#C4DAFB",
     src: "/assets/clock.png",
-    id: 2,
+    id: "2",
   },
   {
     color: "#F6CCCB",
     src: "/assets/notebook.png",
-    id: 3,
+    id: "3",
   },
   {
     color: "#FCF097",
     src: "/assets/rocket.png",
-    id: 4,
+    id: "4",
   },
   {
     color: "#F8D8B0",
     src: "/assets/tools.png",
-    id: 5,
+    id: "5",
   },
 ];
 
@@ -68,10 +68,10 @@ const Sidebar = () => {
 
   const handleSaveBoard = () => {
     const newBoard = {
-      name: boardName,
+      name: boardName !== "" ? boardName : "New board",
       id: uuidv4(),
-      icon: boardIcon,
-      slug: createSlug(boardName),
+      icon: boardIcon !== "" ? boardIcon : "/assets/books.png",
+      slug: createSlug(boardName !== "" ? boardName : "New board"),
       isActive: false,
     };
 
@@ -165,14 +165,24 @@ const Sidebar = () => {
           />
           <div className={styles["container-board-logos"]}>
             {logos.map((logo) => (
-              <BoardLogo
-                key={logo.id}
-                color={logo.color}
-                src={logo.src}
-                isInModal
-                onClick={() => setBoardIcon(`${logo.src}`)}
-                isSelected={boardIcon === logo.src}
-              />
+              <>
+                <input
+                  type="radio"
+                  id={logo.id}
+                  name="boardIcon"
+                  className={styles.radioBtn}
+                />
+                <label htmlFor={logo.id}>
+                  <BoardLogo
+                    key={logo.id}
+                    color={logo.color}
+                    src={logo.src}
+                    isInModal
+                    onClick={() => setBoardIcon(`${logo.src}`)}
+                    isSelected={boardIcon === logo.src}
+                  />
+                </label>
+              </>
             ))}
           </div>
           <div className={styles["container-btns-save-cancel"]}>

@@ -1,7 +1,8 @@
 import { ITask } from "@/types/ITask";
 import { createSlice } from "@reduxjs/toolkit";
+import { defaultTasks } from "../defaultTasks";
 
-const initialState: ITask[] = [];
+const initialState: ITask[] = defaultTasks;
 
 const tasksSlice = createSlice({
   name: "tasks",
