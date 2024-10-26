@@ -5,73 +5,91 @@ import styles from "./SelectStatus.module.scss";
 import React, { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
+import { Control, Controller } from "react-hook-form";
+import { ModalValues } from "@/components/ModalNewTask";
 
 interface ISelectStatus {
-  status: string;
-  setStatus: React.Dispatch<React.SetStateAction<string>>;
+  name: "selectStatus";
+  options: string[];
+  control: Control<ModalValues>;
 }
 
-const statusOptions = ["Backlog", "In Progress", "In Review", "Completed"];
-
-const SelectStatus = ({ status, setStatus }: ISelectStatus) => {
+const SelectStatus = ({ name, options, control }: ISelectStatus) => {
+  const [selectedOption, setSelectedOption] = useState("");
   const [optionsOpen, setOptionsOpen] = useState(false);
   const theme = useAppSelector((store) => store.colorMode);
 
-  const handleOption = (title: string) => {
-    setStatus(title);
+  const handleOption = (title: string, onChange: (value: string) => void) => {
+    setSelectedOption(title);
+    onChange(title);
     setOptionsOpen(false);
   };
 
   return (
-    <div className={sharedStyles.container}>
-      <p
-        className={classNames(sharedStyles.title, {
-          [sharedStyles["title-light"]]: theme.colorMode === "light",
-        })}
-      >
-        Status
-      </p>
-      <div className={sharedStyles.wrapper}>
-        <button
-          onClick={() => setOptionsOpen(!optionsOpen)}
-          className={classNames(sharedStyles.format, styles["btn-status"], {
-            [sharedStyles["format-light"]]: theme.colorMode === "light",
-          })}
-        >
-          {status !== "" ? (
-            <span className={styles.selected}>
-              <Status title={status} />
-            </span>
-          ) : (
-            <span className={sharedStyles["default-text"]}>
-              Choose a status
-            </span>
-          )}
-        </button>
-        {optionsOpen && (
-          <div
-            className={classNames(
-              sharedStyles["container-options"],
-              styles.details,
-              {
-                [sharedStyles["container-options-light"]]:
-                  theme.colorMode === "light",
-              }
-            )}
-          >
-            {statusOptions.map((status) => (
-              <button
-                key={status}
-                className={styles["btn-options"]}
-                onClick={() => handleOption(status)}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => {
+        return (
+          <div className={sharedStyles.container}>
+            <p
+              className={classNames(sharedStyles.title, {
+                [sharedStyles["title-light"]]: theme.colorMode === "light",
+              })}
+            >
+              Status
+            </p>
+            <div className={sharedStyles.wrapper}>
+              <label
+                htmlFor={name}
+                onClick={() => setOptionsOpen(!optionsOpen)}
+                className={classNames(sharedStyles.format, styles.label, {
+                  [sharedStyles["format-light"]]: theme.colorMode === "light",
+                })}
               >
-                <Status title={status} />
-              </button>
-            ))}
+                {selectedOption !== "" ? (
+                  <span className={styles.selected}>
+                    <Status title={selectedOption} />
+                  </span>
+                ) : (
+                  <span className={sharedStyles["default-text"]}>
+                    Choose a status
+                  </span>
+                )}
+              </label>
+              <input
+                {...field}
+                className={sharedStyles["hidden-input"]}
+                id={name}
+              />
+              {optionsOpen && (
+                <div
+                  className={classNames(
+                    sharedStyles["container-options"],
+                    styles.details,
+                    {
+                      [sharedStyles["container-options-light"]]:
+                        theme.colorMode === "light",
+                    }
+                  )}
+                >
+                  {options.map((status) => (
+                    <button
+                      type="button"
+                      key={status}
+                      className={styles["btn-options"]}
+                      onClick={() => handleOption(status, field.onChange)}
+                    >
+                      <Status title={status} />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+        );
+      }}
+    />
   );
 };
 

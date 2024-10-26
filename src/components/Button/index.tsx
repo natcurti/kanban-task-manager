@@ -6,18 +6,20 @@ import classNames from "classnames";
 
 interface IButton {
   title: string;
-  type: ButtonType;
-  onClick: () => void;
+  btnStyle: ButtonType;
+  type: "submit" | "button";
+  onClick?: () => void;
 }
 
-const Button = ({ title, type, onClick }: IButton) => {
+const Button = ({ title, btnStyle, type, onClick }: IButton) => {
   const theme = useAppSelector((store) => store.colorMode);
 
-  if (type === ButtonType.save) {
+  if (btnStyle === ButtonType.save) {
     return (
       <button
         className={`${styles.btn} ${styles["btn-save"]}`}
         onClick={onClick}
+        type={type}
       >
         {title}
         <DoneIcon />
@@ -30,6 +32,7 @@ const Button = ({ title, type, onClick }: IButton) => {
           [styles["btn-cancel"]]: theme.colorMode === "dark",
           [styles["btn-cancel-light"]]: theme.colorMode === "light",
         })}
+        type={type}
         onClick={onClick}
       >
         {title}

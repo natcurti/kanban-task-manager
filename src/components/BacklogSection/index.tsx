@@ -16,8 +16,6 @@ const BacklogSection = ({ boardId }: { boardId: string }) => {
     )
   );
 
-  console.log(activeBoardTasks);
-
   return (
     <section>
       <Status title="Backlog" quantity={0} />

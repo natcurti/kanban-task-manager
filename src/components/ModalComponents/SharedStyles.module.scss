@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
+  margin: 1rem 0 0.25rem;
 }
 
 .title {
@@ -58,4 +58,11 @@
 
 .container-options-light {
   background-color: var(--medium-blue);
+}
+
+.hidden-input {
+  opacity: 0;
+  position: absolute;
+  top: -1000rem;
+  left: -1000rem;
 }

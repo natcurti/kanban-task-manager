@@ -2,15 +2,21 @@
 import { useAppSelector } from "@/store/hooks";
 import sharedStyles from "../SharedStyles.module.scss";
 import classNames from "classnames";
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
-interface IInputName {
+interface IInputName<T extends FieldValues> {
   title: string;
   placeholder: string;
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
+  name: Path<T>;
+  register: UseFormRegister<T>;
 }
 
-const InputName = ({ title, placeholder, name, setName }: IInputName) => {
+const InputName = <T extends FieldValues>({
+  title,
+  placeholder,
+  name,
+  register,
+}: IInputName<T>) => {
   const theme = useAppSelector((store) => store.colorMode);
 
   return (
@@ -19,19 +25,18 @@ const InputName = ({ title, placeholder, name, setName }: IInputName) => {
         className={classNames(sharedStyles.title, {
           [sharedStyles["title-light"]]: theme.colorMode === "light",
         })}
-        id={title}
+        htmlFor={name}
       >
         {title}
       </label>
       <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        id={name}
+        {...register(name)}
         placeholder={placeholder}
         type="text"
         className={classNames(sharedStyles.format, {
           [sharedStyles["format-light"]]: theme.colorMode === "light",
         })}
-        name={title}
       />
     </div>
   );
