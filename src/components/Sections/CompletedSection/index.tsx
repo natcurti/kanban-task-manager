@@ -1,17 +1,18 @@
 import { useAppSelector } from "@/store/hooks";
-import Status from "../Status";
 import { createSelector } from "@reduxjs/toolkit";
 import { ITask } from "@/types/ITask";
-import Task from "../Task";
-import styles from "./BacklogSection.module.scss";
+import Task from "../../Task";
+import styles from "../Sections.module.scss";
+import Status from "@/components/Status";
 
-const BacklogSection = ({ boardId }: { boardId: string }) => {
+const CompletedSection = ({ boardId }: { boardId: string }) => {
   const { activeBoardTasks } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
         activeBoardTasks: store.tasks.filter(
-          (task: ITask) => task.boardId === boardId && task.status === "Backlog"
+          (task: ITask) =>
+            task.boardId === boardId && task.status === "Completed"
         ),
       })
     )
@@ -19,7 +20,7 @@ const BacklogSection = ({ boardId }: { boardId: string }) => {
 
   return (
     <section>
-      <Status title="Backlog" quantity={activeBoardTasks.length} />
+      <Status title="Completed" quantity={activeBoardTasks.length} />
       <div className={styles["container-tasks"]}>
         {activeBoardTasks.map((task: ITask) => (
           <Task key={task.name} {...task} />
@@ -29,4 +30,4 @@ const BacklogSection = ({ boardId }: { boardId: string }) => {
   );
 };
 
-export default BacklogSection;
+export default CompletedSection;

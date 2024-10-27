@@ -18,7 +18,7 @@ const Task = ({ ...task }: ITask) => {
         </div>
       )}
       <p className={styles.title}>{task.name}</p>
-      <div>
+      <div className={styles["container-tags"]}>
         {task.tags.map((tag) => (
           <Tag key={uuidv4()} size="small" title={tag} />
         ))}
