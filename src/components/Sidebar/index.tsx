@@ -7,46 +7,12 @@ import { setIsOpen } from "@/store/reducers/navBar";
 import NavbarItem from "./NavbarItem";
 import SwitchTheme from "../SwitchTheme";
 import { createSelector } from "@reduxjs/toolkit";
-import Modal from "../Modal";
-import { ModalType } from "@/types/ModalType";
 import { setModalBoardOpen } from "@/store/reducers/modalBoard";
-import InputName from "../ModalComponents/InputName";
-import { useRef, useState } from "react";
-import Button from "../Button";
-import { ButtonType } from "@/types/ButtonType";
+import { useRef } from "react";
 import BoardLogo from "../BoardLogo";
 import { IBoard } from "@/types/IBoard";
-import { v4 as uuidv4 } from "uuid";
-import { createSlug } from "@/utils/createSlug";
-import { addBoard, turnBoardActive } from "@/store/reducers/boards";
-
-const logos = [
-  {
-    color: "#F8D8B0",
-    src: "/assets/books.png",
-    id: "1",
-  },
-  {
-    color: "#C4DAFB",
-    src: "/assets/clock.png",
-    id: "2",
-  },
-  {
-    color: "#F6CCCB",
-    src: "/assets/notebook.png",
-    id: "3",
-  },
-  {
-    color: "#FCF097",
-    src: "/assets/rocket.png",
-    id: "4",
-  },
-  {
-    color: "#F8D8B0",
-    src: "/assets/tools.png",
-    id: "5",
-  },
-];
+import ModalNewBoard from "../ModalNewBoard";
+import { turnBoardActive } from "@/store/reducers/boards";
 
 const Sidebar = () => {
   const { isNavbarOpen, theme, isModalOpen, boards } = useAppSelector(
@@ -61,31 +27,8 @@ const Sidebar = () => {
     )
   );
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [boardName, setBoardName] = useState("");
-  const [boardIcon, setBoardIcon] = useState("");
 
   const dispatch = useAppDispatch();
-
-  const handleSaveBoard = () => {
-    const newBoard = {
-      name: boardName !== "" ? boardName : "New board",
-      id: uuidv4(),
-      icon: boardIcon !== "" ? boardIcon : "/assets/books.png",
-      slug: createSlug(boardName !== "" ? boardName : "New board"),
-      isActive: false,
-    };
-
-    dispatch(addBoard(newBoard));
-    setBoardName("");
-    setBoardIcon("");
-    dispatch(setModalBoardOpen());
-  };
-
-  const cancelBoard = () => {
-    setBoardName("");
-    setBoardIcon("");
-    dispatch(setModalBoardOpen());
-  };
 
   const selectBoard = (boardName: string) => {
     dispatch(turnBoardActive(boardName));
@@ -155,50 +98,7 @@ const Sidebar = () => {
           <SwitchTheme isOpen={isNavbarOpen} />
         </nav>
       </div>
-      {isModalOpen && (
-        <Modal title="New board" type={ModalType.newBoard}>
-          <InputName
-            title="Board Name"
-            placeholder="Board name here..."
-            name={boardName}
-            setName={setBoardName}
-          />
-          <div className={styles["container-board-logos"]}>
-            {logos.map((logo) => (
-              <>
-                <input
-                  type="radio"
-                  id={logo.id}
-                  name="boardIcon"
-                  className={styles.radioBtn}
-                />
-                <label htmlFor={logo.id}>
-                  <BoardLogo
-                    key={logo.id}
-                    color={logo.color}
-                    src={logo.src}
-                    isInModal
-                    onClick={() => setBoardIcon(`${logo.src}`)}
-                    isSelected={boardIcon === logo.src}
-                  />
-                </label>
-              </>
-            ))}
-          </div>
-          <div className={styles["container-btns-save-cancel"]}>
-            <Button
-              title="Create board"
-              type={ButtonType.save}
-              onClick={handleSaveBoard}
-            />
-            <Button
-              title="Cancel"
-              type={ButtonType.cancel}
-              onClick={cancelBoard}
-            />
-          </div>
-        </Modal>
-      )}
+      {isModalOpen && <ModalNewBoard />}
     </>
   );
 };

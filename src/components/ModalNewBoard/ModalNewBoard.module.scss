@@ -1,0 +1,18 @@
+.container-board-logos {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.container-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.hidden-input {
+  opacity: 0;
+  position: absolute;
+  top: -1000rem;
+  left: -1000rem;
+}

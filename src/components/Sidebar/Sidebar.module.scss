@@ -42,17 +42,6 @@
   gap: 1.75rem;
 }
 
-.container-btns-save-cancel {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.container-board-logos {
-  display: flex;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
 .backdrop-navbar {
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
@@ -60,11 +49,4 @@
   left: 0;
   width: 100%;
   min-height: 100vh;
-}
-
-.radioBtn {
-  opacity: 0;
-  position: absolute;
-  top: -100000rem;
-  left: -100000rem;
 }
