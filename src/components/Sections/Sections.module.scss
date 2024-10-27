@@ -1,7 +1,16 @@
+.dragging {
+  background-color: var(--medium-gray);
+  border-radius: 0.75rem;
+}
+
 .container-tasks {
   margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
+
+  @media (min-width: 991px) {
+    height: 100%;
+  }
 }

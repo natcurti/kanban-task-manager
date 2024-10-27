@@ -5,6 +5,7 @@ import modalTaskSlice from "./reducers/modalTask";
 import modalBoardSlice from "./reducers/modalBoard";
 import tasksSlice from "./reducers/tasks";
 import boardsSlice from "./reducers/boards";
+import selectedTaskSlice from "./reducers/selectedTask";
 
 export const makeStore = () => {
   return configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () => {
       modalBoard: modalBoardSlice,
       tasks: tasksSlice,
       boards: boardsSlice,
+      selectedTask: selectedTaskSlice,
     },
   });
 };

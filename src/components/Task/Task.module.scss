@@ -7,11 +7,16 @@
   flex-direction: column;
   gap: 0.75rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  outline: 2px solid transparent;
 }
 
 .container-light {
   background-color: var(--white);
   color: var(--black);
+}
+
+.selected-task {
+  outline: 2px dashed var(--blue);
 }
 
 .title {

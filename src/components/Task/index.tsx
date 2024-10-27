@@ -4,17 +4,35 @@ import Tag from "../Tag";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./Task.module.scss";
 import Image from "next/image";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
+import { selectTask } from "@/store/reducers/selectedTask";
+import { createSelector } from "@reduxjs/toolkit";
 
 const Task = ({ ...task }: ITask) => {
-  const theme = useAppSelector((store) => store.colorMode);
+  const { theme, selectedTask } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        theme: store.colorMode,
+        selectedTask: store.selectedTask,
+      })
+    )
+  );
+  const dispatch = useAppDispatch();
+
+  const handleSelectTask = () => {
+    dispatch(selectTask({ ...task }));
+  };
 
   return (
     <div
       className={classNames(styles.container, {
         [styles["container-light"]]: theme.colorMode === "light",
+        [styles["selected-task"]]: selectedTask.name === task.name,
       })}
+      draggable
+      onDragStart={handleSelectTask}
     >
       {task.cover && (
         <div className={styles.cover}>
