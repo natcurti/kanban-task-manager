@@ -1,12 +1,21 @@
+"use client";
 import { ITask } from "@/types/ITask";
 import Tag from "../Tag";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./Task.module.scss";
 import Image from "next/image";
+import { useAppSelector } from "@/store/hooks";
+import classNames from "classnames";
 
 const Task = ({ ...task }: ITask) => {
+  const theme = useAppSelector((store) => store.colorMode);
+
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles["container-light"]]: theme.colorMode === "light",
+      })}
+    >
       {task.cover && (
         <div className={styles.cover}>
           <Image
