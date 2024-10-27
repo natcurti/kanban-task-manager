@@ -14,6 +14,8 @@ const Task = ({ ...task }: ITask) => {
             alt={`Imagem relacionada à tarefa ${task.name}`}
             width={200}
             height={80}
+            style={{ width: "100%", height: "4.85rem" }}
+            priority
           />
         </div>
       )}

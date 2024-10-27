@@ -107,10 +107,11 @@ const ModalNewBoard = () => {
         )}
         <div className={styles["container-board-logos"]}>
           {logos.map((logo) => (
-            <>
+            <div key={logo.id}>
               <input
                 type="radio"
                 id={logo.id}
+                value={logo.src}
                 className={styles["hidden-input"]}
                 {...register("boardIcon")}
               />
@@ -124,7 +125,7 @@ const ModalNewBoard = () => {
                   isSelected={selectedIcon === logo.src}
                 />
               </label>
-            </>
+            </div>
           ))}
         </div>
         {errors?.boardIcon?.message && (

@@ -22,9 +22,10 @@ const CompletedSection = ({ boardId }: { boardId: string }) => {
     <section>
       <Status title="Completed" quantity={activeBoardTasks.length} />
       <div className={styles["container-tasks"]}>
-        {activeBoardTasks.map((task: ITask) => (
-          <Task key={task.name} {...task} />
-        ))}
+        {activeBoardTasks.length > 0 &&
+          activeBoardTasks.map((task: ITask) => (
+            <Task key={task.name} {...task} />
+          ))}
       </div>
     </section>
   );
