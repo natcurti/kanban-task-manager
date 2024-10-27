@@ -3,6 +3,7 @@ import Status from "../Status";
 import { createSelector } from "@reduxjs/toolkit";
 import { ITask } from "@/types/ITask";
 import Task from "../Task";
+import styles from "./BacklogSection.module.scss";
 
 const BacklogSection = ({ boardId }: { boardId: string }) => {
   const { activeBoardTasks } = useAppSelector(
@@ -18,10 +19,12 @@ const BacklogSection = ({ boardId }: { boardId: string }) => {
 
   return (
     <section>
-      <Status title="Backlog" quantity={0} />
-      {activeBoardTasks.map((task: ITask) => (
-        <Task key={task.name} {...task} />
-      ))}
+      <Status title="Backlog" quantity={activeBoardTasks.length} />
+      <div className={styles["container-tasks"]}>
+        {activeBoardTasks.map((task: ITask) => (
+          <Task key={task.name} {...task} />
+        ))}
+      </div>
     </section>
   );
 };
