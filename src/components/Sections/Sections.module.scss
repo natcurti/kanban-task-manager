@@ -3,6 +3,14 @@
   border-radius: 0.75rem;
 }
 
+.dragging-light {
+  background-color: var(--medium-blue);
+}
+
+.container-section {
+  padding: 0.5rem;
+}
+
 .container-tasks {
   margin-top: 1.25rem;
   display: flex;

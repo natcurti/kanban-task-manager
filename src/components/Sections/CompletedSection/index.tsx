@@ -11,7 +11,7 @@ import classNames from "classnames";
 
 const CompletedSection = ({ boardId }: { boardId: string }) => {
   const [isUserDragging, setIsUserDragging] = useState(false);
-  const { activeBoardTasks, selectedTask } = useAppSelector(
+  const { activeBoardTasks, selectedTask, theme } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
@@ -20,6 +20,7 @@ const CompletedSection = ({ boardId }: { boardId: string }) => {
             task.boardId === boardId && task.status === "Completed"
         ),
         selectedTask: store.selectedTask,
+        theme: store.colorMode,
       })
     )
   );
@@ -47,8 +48,10 @@ const CompletedSection = ({ boardId }: { boardId: string }) => {
       onDragOver={handleDragOver}
       onDrop={handleDropTask}
       onDragLeave={() => setIsUserDragging(false)}
-      className={classNames({
+      className={classNames(styles["container-section"], {
         [styles.dragging]: isUserDragging,
+        [styles["dragging-light"]]:
+          isUserDragging && theme.colorMode === "light",
       })}
     >
       <Status title="Completed" quantity={activeBoardTasks.length} />

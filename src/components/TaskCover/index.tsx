@@ -44,6 +44,7 @@ const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
       )}
       <div className={styles["container-buttons"]}>
         <button
+          type="button"
           className={`${styles.btn} ${styles.random}`}
           onClick={() => setGetCover(true)}
         >
@@ -52,6 +53,7 @@ const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
         <button
           className={`${styles.btn} ${styles.remove}`}
           onClick={removeCover}
+          type="button"
         >
           Remove
         </button>
