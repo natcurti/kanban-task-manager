@@ -1,12 +1,14 @@
 export const defaultTasks = [
   {
     name: "Buscar animações no Framer Motion.",
+    id: "1",
     boardId: "1",
     status: "Backlog",
     tags: ["concept"],
   },
   {
     name: "Implementar operações de CRUD.",
+    id: "2",
     boardId: "1",
     status: "Backlog",
     tags: ["technical"],
@@ -15,18 +17,21 @@ export const defaultTasks = [
   },
   {
     name: "Implementar funcionalidade para os usuários editarem tarefas.",
+    id: "3",
     boardId: "1",
     status: "In Progress",
     tags: ["technical", "front-end"],
   },
   {
     name: "Implementar funcionalidade para os usuários visualizarem um conjunto específico de tarefas.",
+    id: "4",
     boardId: "1",
     status: "In Progress",
     tags: ["technical", "front-end"],
   },
   {
     name: "Aplicar o hook useEffect para atualizar o número de tarefas pendentes.",
+    id: "5",
     boardId: "1",
     status: "In Progress",
     tags: ["technical", "front-end"],
@@ -35,12 +40,14 @@ export const defaultTasks = [
   },
   {
     name: "Implementar funcionalidade para os usuários deletarem tarefas.",
+    id: "6",
     boardId: "1",
     status: "In Review",
     tags: ["technical", "front-end"],
   },
   {
     name: "Implementar funcionalidade para os usuários adicionarem tarefas.",
+    id: "7",
     boardId: "1",
     status: "In Review",
     tags: ["technical", "front-end"],
@@ -49,12 +56,14 @@ export const defaultTasks = [
   },
   {
     name: "Criar a estrutura básica do app e estilizar.",
+    id: "8",
     boardId: "1",
     status: "Completed",
     tags: ["technical", "front-end"],
   },
   {
     name: "Criar o design do app.",
+    id: "9",
     boardId: "1",
     status: "Completed",
     tags: ["design"],

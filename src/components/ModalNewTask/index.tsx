@@ -13,9 +13,12 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
-import { useAppDispatch } from "@/store/hooks";
-import { addTask } from "@/store/reducers/tasks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { addTask, updateTask } from "@/store/reducers/tasks";
 import ErrorMessage from "../ErrorMessage";
+import { createSelector } from "@reduxjs/toolkit";
+import { clearTaskToEdit } from "@/store/reducers/taskToEdit";
+import { v4 as uuidv4 } from "uuid";
 
 const statusOptions = ["Backlog", "In Progress", "In Review", "Completed"];
 const tagsOptions = ["concept", "technical", "design", "front-end"];
@@ -30,6 +33,15 @@ export type ModalValues = z.infer<typeof schema>;
 
 const ModalNewTask = ({ boardId }: { boardId: string }) => {
   const [urlCover, setUrlCover] = useState("");
+  const { taskToEdit } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        taskToEdit: store.taskToEdit,
+      })
+    )
+  );
+
   const dispatch = useAppDispatch();
   const {
     register,
@@ -39,28 +51,46 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<ModalValues>({
     defaultValues: {
-      taskName: "",
-      selectStatus: "",
-      selectTags: [],
+      taskName: taskToEdit.length > 0 ? taskToEdit[0].name : "",
+      selectStatus: taskToEdit.length > 0 ? taskToEdit[0].status : "",
+      selectTags: taskToEdit.length > 0 ? taskToEdit[0].tags : [],
     },
     mode: "onSubmit",
     resolver: zodResolver(schema),
   });
 
   const handleNewTask = (values: ModalValues) => {
-    dispatch(
-      addTask({
-        cover: urlCover,
-        name: values.taskName,
-        status: values.selectStatus,
-        tags: values.selectTags,
-        boardId: boardId,
-      })
-    );
+    if (taskToEdit.length > 0) {
+      dispatch(
+        updateTask({
+          cover: urlCover,
+          name: values.taskName,
+          id: taskToEdit[0].id,
+          status: values.selectStatus,
+          tags: values.selectTags,
+          boardId: boardId,
+        })
+      );
+    } else {
+      dispatch(
+        addTask({
+          cover: urlCover,
+          name: values.taskName,
+          id: uuidv4(),
+          status: values.selectStatus,
+          tags: values.selectTags,
+          boardId: boardId,
+        })
+      );
+    }
+
     dispatch(setModalTaskOpen());
   };
 
   const cancelTask = () => {
+    if (taskToEdit) {
+      dispatch(clearTaskToEdit());
+    }
     dispatch(setModalTaskOpen());
     reset();
   };

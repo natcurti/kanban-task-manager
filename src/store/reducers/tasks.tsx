@@ -19,6 +19,7 @@ const tasksSlice = createSlice({
 
       const updatedTask: ITask = {
         name: payload.task.name,
+        id: payload.task.id,
         boardId: payload.task.boardId,
         status: payload.section,
         tags: payload.task.tags,
@@ -27,9 +28,13 @@ const tasksSlice = createSlice({
 
       state.push(updatedTask);
     },
+    updateTask: (state, { payload }) => {
+      const taskIndex = state.findIndex((task) => task.id === payload.id);
+      state.splice(taskIndex, 1, payload);
+    },
   },
 });
 
-export const { addTask, dropTask } = tasksSlice.actions;
+export const { addTask, dropTask, updateTask } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

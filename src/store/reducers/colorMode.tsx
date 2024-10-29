@@ -1,4 +1,4 @@
-import { Theme } from "@/types/theme";
+import { Theme } from "@/types/Theme";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IColorModeState {

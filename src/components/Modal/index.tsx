@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
 import { ModalType } from "@/types/ModalType";
 import { setModalBoardOpen } from "@/store/reducers/modalBoard";
+import { clearTaskToEdit } from "@/store/reducers/taskToEdit";
 
 interface IModal {
   title: string;
@@ -25,6 +26,7 @@ const Modal = ({ title, children, type }: IModal) => {
     if (e.target === overlayRef.current) {
       if (type === ModalType.newTask) {
         dispatch(setModalTaskOpen());
+        dispatch(clearTaskToEdit());
       } else {
         dispatch(setModalBoardOpen());
       }
@@ -36,6 +38,7 @@ const Modal = ({ title, children, type }: IModal) => {
   const handleCloseModal = () => {
     if (type === ModalType.newTask) {
       dispatch(setModalTaskOpen());
+      dispatch(clearTaskToEdit());
     } else {
       dispatch(setModalBoardOpen());
     }

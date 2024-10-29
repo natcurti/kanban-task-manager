@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
+import { createSelector } from "@reduxjs/toolkit";
 
 interface ITaskCover {
   urlCover: string;
@@ -13,7 +14,23 @@ interface ITaskCover {
 
 const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
   const [getCover, setGetCover] = useState(false);
-  const theme = useAppSelector((store) => store.colorMode);
+  const { taskToEdit, theme } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        taskToEdit: store.taskToEdit,
+        theme: store.colorMode,
+      })
+    )
+  );
+
+  useEffect(() => {
+    if (taskToEdit.length > 0) {
+      setUrlCover(taskToEdit[0].cover);
+    } else {
+      setUrlCover("");
+    }
+  }, [taskToEdit, setUrlCover]);
 
   useEffect(() => {
     const coverImg = async () => {
@@ -40,7 +57,12 @@ const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
       })}
     >
       {urlCover && (
-        <Image src={urlCover} alt="Task Cover Random Image" fill={true} />
+        <Image
+          src={urlCover}
+          alt="Task Cover Random Image"
+          fill={true}
+          priority
+        />
       )}
       <div className={styles["container-buttons"]}>
         <button

@@ -2,11 +2,12 @@
 import Tag from "@/components/Tag";
 import sharedStyles from "../SharedStyles.module.scss";
 import styles from "./SelectTags.module.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
 import { Control, Controller } from "react-hook-form";
 import { ModalValues } from "@/components/ModalNewTask";
+import { createSelector } from "@reduxjs/toolkit";
 
 interface ISelectTags {
   name: "selectTags";
@@ -17,7 +18,15 @@ interface ISelectTags {
 const SelectTags = ({ name, options, control }: ISelectTags) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const theme = useAppSelector((store) => store.colorMode);
+  const { taskToEdit, theme } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        taskToEdit: store.taskToEdit,
+        theme: store.colorMode,
+      })
+    )
+  );
 
   const handleSelectTag = (tag: string, onChange: (tags: string[]) => void) => {
     const isSelected = selectedTags.find((selectedTag) => selectedTag === tag);
@@ -32,6 +41,14 @@ const SelectTags = ({ name, options, control }: ISelectTags) => {
     }
     setOptionsOpen(false);
   };
+
+  useEffect(() => {
+    if (taskToEdit.length > 0) {
+      setSelectedTags(taskToEdit[0].tags);
+    } else {
+      setSelectedTags([]);
+    }
+  }, [taskToEdit]);
 
   return (
     <Controller
