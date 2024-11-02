@@ -8,9 +8,9 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
 import { selectTask } from "@/store/reducers/selectedTask";
 import { createSelector } from "@reduxjs/toolkit";
-import { EditIcon } from "../Icons";
 import { selectTaskToEdit } from "@/store/reducers/taskToEdit";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
+import ButtonEdit from "../ButtonEdit";
 
 const Task = ({ ...task }: ITask) => {
   const { theme, selectedTask } = useAppSelector(
@@ -61,9 +61,7 @@ const Task = ({ ...task }: ITask) => {
             <Tag key={uuidv4()} size="small" title={tag} />
           ))}
         </div>
-        <button className={styles["btn-edit"]} onClick={handleEdit}>
-          <EditIcon colorMode={theme.colorMode} />
-        </button>
+        <ButtonEdit colorMode={theme.colorMode} onClick={handleEdit} />
       </div>
     </div>
   );

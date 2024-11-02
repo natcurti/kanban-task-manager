@@ -1,0 +1,13 @@
+.btn-edit {
+  background-color: transparent;
+  border: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+
+  &:hover {
+    outline: 2px solid var(--blue);
+  }
+}

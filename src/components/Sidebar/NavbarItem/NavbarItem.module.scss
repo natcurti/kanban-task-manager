@@ -49,7 +49,10 @@
 }
 
 .title {
-  width: max-content;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
   position: absolute;
   left: 10rem;
   opacity: 0;
@@ -59,4 +62,12 @@
 .title-opened {
   opacity: 1;
   left: 4rem;
+}
+
+.btn-edit-board {
+  display: grid;
+  place-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
