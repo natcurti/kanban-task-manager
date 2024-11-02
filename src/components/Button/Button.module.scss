@@ -41,3 +41,20 @@
     color: var(--light-gray);
   }
 }
+
+.btn-delete {
+  background-color: var(--light-gray);
+  border: 2px solid transparent;
+
+  &:hover {
+    border-color: var(--white);
+  }
+}
+
+.btn-disabled {
+  opacity: 0.3;
+
+  &:hover {
+    border-color: transparent;
+  }
+}

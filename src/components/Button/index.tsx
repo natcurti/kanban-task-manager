@@ -1,6 +1,6 @@
 import { ButtonType } from "@/types/ButtonType";
 import styles from "./Button.module.scss";
-import { DoneIcon } from "../Icons";
+import { DeleteIcon, DoneIcon } from "../Icons";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
 
@@ -9,9 +9,10 @@ interface IButton {
   btnStyle: ButtonType;
   type: "submit" | "button";
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-const Button = ({ title, btnStyle, type, onClick }: IButton) => {
+const Button = ({ title, btnStyle, type, onClick, disabled }: IButton) => {
   const theme = useAppSelector((store) => store.colorMode);
 
   if (btnStyle === ButtonType.save) {
@@ -25,7 +26,7 @@ const Button = ({ title, btnStyle, type, onClick }: IButton) => {
         <DoneIcon />
       </button>
     );
-  } else {
+  } else if (btnStyle === ButtonType.cancel) {
     return (
       <button
         className={classNames(styles.btn, {
@@ -36,6 +37,20 @@ const Button = ({ title, btnStyle, type, onClick }: IButton) => {
         onClick={onClick}
       >
         {title}
+      </button>
+    );
+  } else {
+    return (
+      <button
+        className={classNames(styles.btn, styles["btn-delete"], {
+          [styles["btn-disabled"]]: disabled,
+        })}
+        onClick={onClick}
+        type={type}
+        disabled={disabled}
+      >
+        {title}
+        <DeleteIcon colorMode={theme.colorMode} />
       </button>
     );
   }

@@ -14,7 +14,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addTask, updateTask } from "@/store/reducers/tasks";
+import { addTask, deleteTask, updateTask } from "@/store/reducers/tasks";
 import ErrorMessage from "../ErrorMessage";
 import { createSelector } from "@reduxjs/toolkit";
 import { clearTaskToEdit } from "@/store/reducers/taskToEdit";
@@ -95,6 +95,15 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
     reset();
   };
 
+  const handleDeleteTask = () => {
+    if (taskToEdit) {
+      dispatch(deleteTask(taskToEdit[0].id));
+      dispatch(clearTaskToEdit());
+      dispatch(setModalTaskOpen());
+      reset();
+    }
+  };
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
@@ -127,12 +136,21 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
           <ErrorMessage>{errors.selectTags.message}</ErrorMessage>
         )}
         <div className={styles["container-buttons"]}>
-          <Button title="Save" btnStyle={ButtonType.save} type="submit" />
+          <div>
+            <Button title="Save" btnStyle={ButtonType.save} type="submit" />
+            <Button
+              title="Cancel"
+              btnStyle={ButtonType.cancel}
+              type="button"
+              onClick={cancelTask}
+            />
+          </div>
           <Button
-            title="Cancel"
-            btnStyle={ButtonType.cancel}
+            title="Deletar tarefa"
+            btnStyle={ButtonType.delete}
             type="button"
-            onClick={cancelTask}
+            disabled={taskToEdit.length === 0}
+            onClick={handleDeleteTask}
           />
         </div>
       </form>
