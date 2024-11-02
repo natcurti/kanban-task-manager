@@ -1,8 +1,17 @@
 import { ITask } from "@/types/ITask";
 import { createSlice } from "@reduxjs/toolkit";
 import { defaultTasks } from "../defaultTasks";
+import { LocalStorage } from "@/utils/LocalStorage";
 
-const initialState: ITask[] = defaultTasks;
+const getTasksFromStorage = <T,>(key: string) => {
+  const tasks = LocalStorage.getItemFromStorage(key);
+  if (tasks) {
+    const parsedTasks = JSON.parse(tasks);
+    return parsedTasks as T[];
+  } else return null;
+};
+
+const initialState: ITask[] = getTasksFromStorage("tasks") || defaultTasks;
 
 const tasksSlice = createSlice({
   name: "tasks",

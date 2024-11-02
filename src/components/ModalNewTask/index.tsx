@@ -19,6 +19,8 @@ import ErrorMessage from "../ErrorMessage";
 import { createSelector } from "@reduxjs/toolkit";
 import { clearTaskToEdit } from "@/store/reducers/taskToEdit";
 import { v4 as uuidv4 } from "uuid";
+import { LocalStorage } from "@/utils/LocalStorage";
+import { ITask } from "@/types/ITask";
 
 const statusOptions = ["Backlog", "In Progress", "In Review", "Completed"];
 const tagsOptions = ["concept", "technical", "design", "front-end"];
@@ -32,6 +34,7 @@ const schema = z.object({
 export type ModalValues = z.infer<typeof schema>;
 
 const ModalNewTask = ({ boardId }: { boardId: string }) => {
+  const [tasksOnStorage, setTasksOnStorage] = useState<ITask[]>([]);
   const [urlCover, setUrlCover] = useState("");
   const { taskToEdit } = useAppSelector(
     createSelector(
@@ -59,29 +62,38 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
     resolver: zodResolver(schema),
   });
 
+  useEffect(() => {
+    const allTasks = LocalStorage.getItemFromStorage("tasks");
+    if (allTasks) {
+      setTasksOnStorage(JSON.parse(allTasks));
+    }
+  }, []);
+
+  useEffect(() => {
+    LocalStorage.setItemOnStorage("tasks", JSON.stringify(tasksOnStorage));
+  }, [tasksOnStorage]);
+
+  console.log(tasksOnStorage);
+
   const handleNewTask = (values: ModalValues) => {
+    const newTask = {
+      cover: urlCover,
+      name: values.taskName,
+      id: taskToEdit.length > 0 ? taskToEdit[0].id : uuidv4(),
+      status: values.selectStatus,
+      tags: values.selectTags,
+      boardId: boardId,
+    };
+
     if (taskToEdit.length > 0) {
-      dispatch(
-        updateTask({
-          cover: urlCover,
-          name: values.taskName,
-          id: taskToEdit[0].id,
-          status: values.selectStatus,
-          tags: values.selectTags,
-          boardId: boardId,
-        })
+      dispatch(updateTask(newTask));
+      const taskIndex = tasksOnStorage.findIndex(
+        (task) => task.id === newTask.id
       );
+      setTasksOnStorage(tasksOnStorage.splice(taskIndex, 1, newTask));
     } else {
-      dispatch(
-        addTask({
-          cover: urlCover,
-          name: values.taskName,
-          id: uuidv4(),
-          status: values.selectStatus,
-          tags: values.selectTags,
-          boardId: boardId,
-        })
-      );
+      dispatch(addTask(newTask));
+      setTasksOnStorage([...tasksOnStorage, newTask]);
     }
 
     dispatch(setModalTaskOpen());
@@ -100,6 +112,9 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
       dispatch(deleteTask(taskToEdit[0].id));
       dispatch(clearTaskToEdit());
       dispatch(setModalTaskOpen());
+      setTasksOnStorage(
+        tasksOnStorage.filter((task) => task.id !== taskToEdit[0].id)
+      );
       reset();
     }
   };

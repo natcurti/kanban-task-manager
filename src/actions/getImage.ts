@@ -1,4 +1,4 @@
-export const getImage = async (): Promise<string | null> => {
+export async function getImage(): Promise<string | null> {
   try {
     const apiResponse = await fetch(
       `https://api.unsplash.com/photos/random?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY}`
@@ -9,4 +9,4 @@ export const getImage = async (): Promise<string | null> => {
   } catch {
     return null;
   }
-};
+}

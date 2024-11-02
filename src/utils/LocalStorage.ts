@@ -5,6 +5,11 @@ export class LocalStorage {
   static getItemFromStorage(key: string) {
     const item = localStorage.getItem(key);
     return item;
+
+    // if (item) {
+    //   return JSON.parse(item);
+    // }
+    // return null;
   }
   static deleteItemFromStorage(key: string) {
     localStorage.removeItem(key);

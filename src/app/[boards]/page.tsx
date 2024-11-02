@@ -8,6 +8,8 @@ import ProgressSection from "@/components/Sections/ProgressSection";
 import { useAppSelector } from "@/store/hooks";
 import { createSelector } from "@reduxjs/toolkit";
 import { IBoard } from "@/types/IBoard";
+import { useEffect } from "react";
+import { LocalStorage } from "@/utils/LocalStorage";
 
 interface IBoardParams {
   params: {
@@ -16,16 +18,21 @@ interface IBoardParams {
 }
 
 export default function Board({ params }: IBoardParams) {
-  const { activeBoard } = useAppSelector(
+  const { activeBoard, allTasks } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
         activeBoard: store.boards.filter(
           (board: IBoard) => board.slug === params.boards
         ),
+        allTasks: store.tasks,
       })
     )
   );
+
+  useEffect(() => {
+    LocalStorage.setItemOnStorage("tasks", JSON.stringify(allTasks));
+  }, [allTasks]);
 
   return (
     <MainContainer>
