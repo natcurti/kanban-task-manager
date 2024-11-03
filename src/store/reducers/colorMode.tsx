@@ -1,23 +1,22 @@
-import { LocalStorage } from "@/utils/LocalStorage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface IColorModeState {
-  colorMode: string;
-}
-
-const initialState: IColorModeState = {
-  colorMode: LocalStorage.getItemFromStorage("theme") || "dark",
-};
 
 const colorModeSlice = createSlice({
   name: "colorMode",
-  initialState,
+  initialState: "dark",
   reducers: {
     setColorMode: (state, action: PayloadAction<string | undefined>) => {
       if (action.payload) {
-        state.colorMode = action.payload === "dark" ? "dark" : "light";
+        if (action.payload === "dark") {
+          return "dark";
+        } else {
+          return "light";
+        }
       } else {
-        state.colorMode = state.colorMode === "dark" ? "light" : "dark";
+        if (state === "dark") {
+          return "light";
+        } else {
+          return "dark";
+        }
       }
     },
   },

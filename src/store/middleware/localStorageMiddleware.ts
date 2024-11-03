@@ -7,13 +7,33 @@ import {
 } from "../reducers/tasks";
 import { IRootState } from "..";
 import { LocalStorage } from "@/utils/LocalStorage";
+import { setColorMode } from "../reducers/colorMode";
 
 export const listener = createListenerMiddleware();
 
 listener.startListening({
-  matcher: isAnyOf(loadInitialTasks, addTask, updateTask, deleteTask),
-  effect: (_action, { getState }) => {
+  matcher: isAnyOf(
+    loadInitialTasks,
+    addTask,
+    updateTask,
+    deleteTask,
+    setColorMode
+  ),
+  effect: (action, { getState }) => {
     const store: IRootState = getState() as IRootState;
-    LocalStorage.setItemOnStorage("tasks", JSON.stringify(store.tasks));
+
+    switch (action.type) {
+      case loadInitialTasks.type:
+      case addTask.type:
+      case updateTask.type:
+      case deleteTask.type:
+        LocalStorage.setItemOnStorage("tasks", JSON.stringify(store.tasks));
+        break;
+      case setColorMode.type:
+        LocalStorage.setItemOnStorage("theme", store.colorMode);
+        break;
+      default:
+        break;
+    }
   },
 });

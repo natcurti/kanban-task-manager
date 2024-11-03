@@ -24,7 +24,7 @@ const BoardLogo = ({
       style={{ backgroundColor: color }}
       onClick={onClick}
     >
-      <Image src={src} width={32} height={32} alt="Board Logo" />
+      <Image src={src} width={32} height={32} alt="Board Logo" priority />
     </div>
   );
 };

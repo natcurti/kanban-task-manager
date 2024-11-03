@@ -30,8 +30,8 @@ const Button = ({ title, btnStyle, type, onClick, disabled }: IButton) => {
     return (
       <button
         className={classNames(styles.btn, {
-          [styles["btn-cancel"]]: theme.colorMode === "dark",
-          [styles["btn-cancel-light"]]: theme.colorMode === "light",
+          [styles["btn-cancel"]]: theme === "dark",
+          [styles["btn-cancel-light"]]: theme === "light",
         })}
         type={type}
         onClick={onClick}
@@ -50,7 +50,7 @@ const Button = ({ title, btnStyle, type, onClick, disabled }: IButton) => {
         disabled={disabled}
       >
         {title}
-        <DeleteIcon colorMode={theme.colorMode} />
+        <DeleteIcon colorMode={theme} />
       </button>
     );
   }

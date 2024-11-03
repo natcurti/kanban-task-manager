@@ -23,7 +23,7 @@ const InputName = <T extends FieldValues>({
     <div className={sharedStyles.container}>
       <label
         className={classNames(sharedStyles.title, {
-          [sharedStyles["title-light"]]: theme.colorMode === "light",
+          [sharedStyles["title-light"]]: theme === "light",
         })}
         htmlFor={name}
       >
@@ -35,7 +35,7 @@ const InputName = <T extends FieldValues>({
         placeholder={placeholder}
         type="text"
         className={classNames(sharedStyles.format, {
-          [sharedStyles["format-light"]]: theme.colorMode === "light",
+          [sharedStyles["format-light"]]: theme === "light",
         })}
       />
     </div>

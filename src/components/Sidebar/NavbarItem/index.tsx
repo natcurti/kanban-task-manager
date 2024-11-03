@@ -28,7 +28,7 @@ const NavbarItem = ({
       className={classNames(styles.item, {
         [styles["item-opened"]]: isOpen,
         [styles.active]: isActive,
-        [styles["active-light"]]: isActive && theme.colorMode === "light",
+        [styles["active-light"]]: isActive && theme === "light",
       })}
       onClick={onClick}
     >
@@ -36,7 +36,7 @@ const NavbarItem = ({
         <Link
           href={`/${href}`}
           className={classNames(styles.link, {
-            [styles["link-light"]]: theme.colorMode === "light",
+            [styles["link-light"]]: theme === "light",
           })}
         >
           <span className={styles.icon}>{children}</span>
@@ -46,13 +46,13 @@ const NavbarItem = ({
             })}
           >
             {title}
-            <ButtonEdit colorMode={theme.colorMode} onClick={() => {}} />
+            <ButtonEdit colorMode={theme} onClick={() => {}} />
           </span>
         </Link>
       ) : (
         <div
           className={classNames(styles.addBoard, {
-            [styles["addBoard-light"]]: theme.colorMode === "light",
+            [styles["addBoard-light"]]: theme === "light",
           })}
         >
           <span className={styles.icon}>{children}</span>

@@ -51,8 +51,7 @@ const CompletedSection = ({ boardId }: { boardId: string }) => {
       onDragLeave={() => setIsUserDragging(false)}
       className={classNames(styles["container-section"], {
         [styles.dragging]: isUserDragging,
-        [styles["dragging-light"]]:
-          isUserDragging && theme.colorMode === "light",
+        [styles["dragging-light"]]: isUserDragging && theme === "light",
       })}
     >
       <Status title="Completed" quantity={activeBoardTasks.length} />

@@ -51,7 +51,7 @@ const SelectStatus = ({ name, options, control }: ISelectStatus) => {
           <div className={sharedStyles.container}>
             <p
               className={classNames(sharedStyles.title, {
-                [sharedStyles["title-light"]]: theme.colorMode === "light",
+                [sharedStyles["title-light"]]: theme === "light",
               })}
             >
               Status
@@ -61,7 +61,7 @@ const SelectStatus = ({ name, options, control }: ISelectStatus) => {
                 htmlFor={name}
                 onClick={() => setOptionsOpen(!optionsOpen)}
                 className={classNames(sharedStyles.format, styles.label, {
-                  [sharedStyles["format-light"]]: theme.colorMode === "light",
+                  [sharedStyles["format-light"]]: theme === "light",
                 })}
               >
                 {selectedOption !== "" ? (
@@ -86,7 +86,7 @@ const SelectStatus = ({ name, options, control }: ISelectStatus) => {
                     styles.details,
                     {
                       [sharedStyles["container-options-light"]]:
-                        theme.colorMode === "light",
+                        theme === "light",
                     }
                   )}
                 >

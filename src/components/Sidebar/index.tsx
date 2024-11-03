@@ -56,20 +56,20 @@ const Sidebar = () => {
         <nav
           className={classNames(styles.navbar, {
             [styles["navbar-opened"]]: isNavbarOpen,
-            [styles.light]: theme.colorMode === "light",
+            [styles.light]: theme === "light",
           })}
         >
           <div>
             <button
               className={classNames(styles["btn-menu"], {
-                [styles["btn-menu-light"]]: theme.colorMode === "light",
+                [styles["btn-menu-light"]]: theme === "light",
               })}
               onClick={() => dispatch(setIsOpen())}
             >
               {isNavbarOpen ? (
-                <CloseIcon colorMode={theme.colorMode} />
+                <CloseIcon colorMode={theme} />
               ) : (
-                <MenuIcon colorMode={theme.colorMode} />
+                <MenuIcon colorMode={theme} />
               )}
             </button>
             <ul className={styles["container-buttons"]}>
@@ -91,7 +91,7 @@ const Sidebar = () => {
                 isOpen={isNavbarOpen}
                 onClick={() => dispatch(setModalBoardOpen())}
               >
-                <AddBoardIcon colorMode={theme.colorMode} />
+                <AddBoardIcon colorMode={theme} />
               </NavbarItem>
             </ul>
           </div>

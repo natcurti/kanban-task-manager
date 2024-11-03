@@ -9,7 +9,7 @@ const Loader = () => {
   return (
     <span
       className={classNames(styles.loader, {
-        [styles["loader-light"]]: theme.colorMode === "light",
+        [styles["loader-light"]]: theme === "light",
       })}
     ></span>
   );

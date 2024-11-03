@@ -30,7 +30,7 @@ const MainContainer = ({ children }: IMainContainer) => {
   return (
     <main
       className={classNames(styles.main, {
-        [styles.light]: theme.colorMode === "light",
+        [styles.light]: theme === "light",
       })}
     >
       {children}

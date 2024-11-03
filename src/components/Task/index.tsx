@@ -36,7 +36,7 @@ const Task = ({ ...task }: ITask) => {
   return (
     <div
       className={classNames(styles.container, {
-        [styles["container-light"]]: theme.colorMode === "light",
+        [styles["container-light"]]: theme === "light",
         [styles["selected-task"]]: selectedTask.name === task.name,
       })}
       draggable
@@ -61,7 +61,7 @@ const Task = ({ ...task }: ITask) => {
             <Tag key={uuidv4()} size="small" title={tag} />
           ))}
         </div>
-        <ButtonEdit colorMode={theme.colorMode} onClick={handleEdit} />
+        <ButtonEdit colorMode={theme} onClick={handleEdit} />
       </div>
     </div>
   );

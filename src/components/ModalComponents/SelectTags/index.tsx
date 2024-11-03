@@ -58,7 +58,7 @@ const SelectTags = ({ name, options, control }: ISelectTags) => {
         <div className={sharedStyles.container}>
           <p
             className={classNames(sharedStyles.title, {
-              [sharedStyles["title-light"]]: theme.colorMode === "light",
+              [sharedStyles["title-light"]]: theme === "light",
             })}
           >
             Tags
@@ -67,7 +67,7 @@ const SelectTags = ({ name, options, control }: ISelectTags) => {
             <label
               htmlFor={name}
               className={classNames(sharedStyles.format, styles.label, {
-                [sharedStyles["format-light"]]: theme.colorMode === "light",
+                [sharedStyles["format-light"]]: theme === "light",
               })}
               onClick={() => setOptionsOpen(!optionsOpen)}
             >
@@ -95,7 +95,7 @@ const SelectTags = ({ name, options, control }: ISelectTags) => {
                   styles.details,
                   {
                     [sharedStyles["container-options-light"]]:
-                      theme.colorMode === "light",
+                      theme === "light",
                   }
                 )}
               >

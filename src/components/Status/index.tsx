@@ -18,7 +18,7 @@ const Status = ({ title, quantity }: { title: string; quantity?: number }) => {
       ></div>
       <p
         className={classNames({
-          [styles["title-light"]]: theme.colorMode === "light",
+          [styles["title-light"]]: theme === "light",
         })}
       >
         {title}

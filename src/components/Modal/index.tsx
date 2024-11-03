@@ -52,17 +52,17 @@ const Modal = ({ title, children, type }: IModal) => {
     >
       <section
         className={classNames(styles.modal, {
-          [styles["modal-light"]]: theme.colorMode === "light",
+          [styles["modal-light"]]: theme === "light",
         })}
       >
         <div
           className={classNames(styles.title, {
-            [styles["title-light"]]: theme.colorMode === "light",
+            [styles["title-light"]]: theme === "light",
           })}
         >
           <p>{title}</p>
           <button className={styles.icon} onClick={handleCloseModal}>
-            <CloseModal colorMode={theme.colorMode} />
+            <CloseModal colorMode={theme} />
           </button>
         </div>
         {children}

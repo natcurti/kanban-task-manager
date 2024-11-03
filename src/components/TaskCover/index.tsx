@@ -53,7 +53,7 @@ const TaskCover = ({ urlCover, setUrlCover }: ITaskCover) => {
   return (
     <div
       className={classNames(styles.cover, {
-        [styles["cover-light"]]: theme.colorMode === "light",
+        [styles["cover-light"]]: theme === "light",
       })}
     >
       {urlCover && (
