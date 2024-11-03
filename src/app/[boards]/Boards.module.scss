@@ -16,3 +16,10 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.container-loader {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  place-items: center;
+}

@@ -7,6 +7,7 @@ import tasksSlice from "./reducers/tasks";
 import boardsSlice from "./reducers/boards";
 import selectedTaskSlice from "./reducers/selectedTask";
 import taskToEditSlice from "./reducers/taskToEdit";
+import { listener } from "./middleware/localStorageMiddleware";
 
 export const makeStore = () => {
   return configureStore({
@@ -20,6 +21,8 @@ export const makeStore = () => {
       selectedTask: selectedTaskSlice,
       taskToEdit: taskToEditSlice,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().prepend(listener.middleware),
   });
 };
 

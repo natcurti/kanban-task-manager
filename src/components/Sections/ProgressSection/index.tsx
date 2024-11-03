@@ -1,3 +1,4 @@
+"use client";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createSelector } from "@reduxjs/toolkit";
 import { ITask } from "@/types/ITask";

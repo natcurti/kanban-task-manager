@@ -5,11 +5,14 @@ import BacklogSection from "@/components/Sections/BacklogSection";
 import CompletedSection from "@/components/Sections/CompletedSection";
 import ReviewSection from "@/components/Sections/ReviewSection";
 import ProgressSection from "@/components/Sections/ProgressSection";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createSelector } from "@reduxjs/toolkit";
 import { IBoard } from "@/types/IBoard";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { LocalStorage } from "@/utils/LocalStorage";
+import { loadInitialTasks } from "@/store/reducers/tasks";
+import { defaultTasks } from "@/store/defaultTasks";
+import Loader from "@/components/Loader";
 
 interface IBoardParams {
   params: {
@@ -18,30 +21,48 @@ interface IBoardParams {
 }
 
 export default function Board({ params }: IBoardParams) {
-  const { activeBoard, allTasks } = useAppSelector(
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { activeBoard } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
         activeBoard: store.boards.filter(
           (board: IBoard) => board.slug === params.boards
         ),
-        allTasks: store.tasks,
       })
     )
   );
+  const dispatch = useAppDispatch();
+
+  const getTasks = useMemo(() => {
+    const tasks = LocalStorage.getItemFromStorage("tasks");
+    if (tasks) {
+      const parsedTasks = JSON.parse(tasks);
+      dispatch(loadInitialTasks(parsedTasks));
+    } else {
+      dispatch(loadInitialTasks(defaultTasks));
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    LocalStorage.setItemOnStorage("tasks", JSON.stringify(allTasks));
-  }, [allTasks]);
+    setIsLoading(false);
+  }, [getTasks]);
 
   return (
     <MainContainer>
-      <section className={styles["tasks-container"]}>
-        <BacklogSection boardId={activeBoard[0].id} />
-        <ProgressSection boardId={activeBoard[0].id} />
-        <ReviewSection boardId={activeBoard[0].id} />
-        <CompletedSection boardId={activeBoard[0].id} />
-      </section>
+      {isLoading ? (
+        <div className={styles["container-loader"]}>
+          <Loader />
+        </div>
+      ) : (
+        <section className={styles["tasks-container"]}>
+          <BacklogSection boardId={activeBoard[0].id} />
+          <ProgressSection boardId={activeBoard[0].id} />
+          <ReviewSection boardId={activeBoard[0].id} />
+          <CompletedSection boardId={activeBoard[0].id} />
+        </section>
+      )}
     </MainContainer>
   );
 }
