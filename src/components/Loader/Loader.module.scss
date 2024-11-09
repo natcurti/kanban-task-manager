@@ -1,5 +1,5 @@
 .loader {
-  color: var(--white);
+  color: var(--light-gray);
   font-size: 45px;
   text-indent: -9999em;
   overflow: hidden;
@@ -9,10 +9,6 @@
   position: relative;
   transform: translateZ(0);
   animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
-}
-
-.loader-light {
-  color: var(--black);
 }
 
 @keyframes mltShdSpin {

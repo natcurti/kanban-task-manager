@@ -12,7 +12,6 @@ const BodyStyled = ({ children }: { children: React.ReactNode }) => {
 
   useLayoutEffect(() => {
     const theme = LocalStorage.getItemFromStorage("theme");
-    console.log(theme);
     if (theme) {
       dispatch(setColorMode(theme));
     }

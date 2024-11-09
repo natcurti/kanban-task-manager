@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./NavbarItem.module.scss";
 import classNames from "classnames";
 import { useAppSelector } from "@/store/hooks";
-import ButtonEdit from "@/components/ButtonEdit";
 
 interface INavbarItem {
   title: string;
@@ -46,7 +45,6 @@ const NavbarItem = ({
             })}
           >
             {title}
-            <ButtonEdit colorMode={theme} onClick={() => {}} />
           </span>
         </Link>
       ) : (

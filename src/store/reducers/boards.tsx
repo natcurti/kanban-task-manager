@@ -1,20 +1,15 @@
 import { IBoard } from "@/types/IBoard";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: IBoard[] = [
-  {
-    name: "Default Board",
-    id: "1",
-    slug: "default-board",
-    icon: "/assets/books.png",
-    isActive: true,
-  },
-];
+const initialState: IBoard[] = [];
 
 const boardsSlice = createSlice({
   name: "boards",
   initialState,
   reducers: {
+    loadInitialBoards: (_state, { payload }) => {
+      return payload;
+    },
     addBoard: (state, { payload }) => {
       state.push(payload);
     },
@@ -30,6 +25,7 @@ const boardsSlice = createSlice({
   },
 });
 
-export const { addBoard, turnBoardActive } = boardsSlice.actions;
+export const { addBoard, turnBoardActive, loadInitialBoards } =
+  boardsSlice.actions;
 
 export default boardsSlice.reducer;

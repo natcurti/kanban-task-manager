@@ -13,6 +13,7 @@ import BoardLogo from "../BoardLogo";
 import { IBoard } from "@/types/IBoard";
 import ModalNewBoard from "../ModalNewBoard";
 import { turnBoardActive } from "@/store/reducers/boards";
+import ButtonEdit from "../ButtonEdit";
 
 const Sidebar = () => {
   const { isNavbarOpen, theme, isModalOpen, boards } = useAppSelector(
@@ -42,6 +43,10 @@ const Sidebar = () => {
     } else {
       e.stopPropagation();
     }
+  };
+
+  const handleEditBoard = (board: IBoard) => {
+    dispatch(setModalBoardOpen());
   };
 
   return (
@@ -74,16 +79,27 @@ const Sidebar = () => {
             </button>
             <ul className={styles["container-buttons"]}>
               {boards.map((board: IBoard) => (
-                <NavbarItem
-                  key={board.id}
-                  title={board.name}
-                  isOpen={isNavbarOpen}
-                  isActive={board.isActive}
-                  href={board.slug}
-                  onClick={() => selectBoard(board.name)}
-                >
-                  <BoardLogo color="#F8D8B0" src={board.icon} />
-                </NavbarItem>
+                <div key={board.id} className={styles["container-nav-item"]}>
+                  <NavbarItem
+                    title={board.name}
+                    isOpen={isNavbarOpen}
+                    isActive={board.isActive}
+                    href={board.slug}
+                    onClick={() => selectBoard(board.name)}
+                  >
+                    <BoardLogo color="#F8D8B0" src={board.icon} />
+                  </NavbarItem>
+                  <span
+                    className={classNames(styles["btn-edit"], {
+                      [styles["btn-edit-open"]]: isNavbarOpen,
+                    })}
+                  >
+                    <ButtonEdit
+                      colorMode={theme}
+                      onClick={() => handleEditBoard(board)}
+                    />
+                  </span>
+                </div>
               ))}
 
               <NavbarItem

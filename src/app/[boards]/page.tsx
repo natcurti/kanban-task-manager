@@ -13,6 +13,9 @@ import { LocalStorage } from "@/utils/LocalStorage";
 import { loadInitialTasks } from "@/store/reducers/tasks";
 import { defaultTasks } from "@/store/defaultTasks";
 import Loader from "@/components/Loader";
+import Sidebar from "@/components/Sidebar";
+import { defaultBoard } from "@/store/defaultBoard";
+import { loadInitialBoards } from "@/store/reducers/boards";
 
 interface IBoardParams {
   params: {
@@ -45,24 +48,39 @@ export default function Board({ params }: IBoardParams) {
     }
   }, [dispatch]);
 
+  const getBoards = useMemo(() => {
+    const boards = LocalStorage.getItemFromStorage("boards");
+    if (boards) {
+      const parsedBoards = JSON.parse(boards);
+      dispatch(loadInitialBoards(parsedBoards));
+    } else {
+      dispatch(loadInitialBoards(defaultBoard));
+    }
+  }, [dispatch]);
+
   useEffect(() => {
     setIsLoading(false);
-  }, [getTasks]);
+  }, [getTasks, getBoards]);
 
   return (
-    <MainContainer>
+    <>
       {isLoading ? (
         <div className={styles["container-loader"]}>
           <Loader />
         </div>
       ) : (
-        <section className={styles["tasks-container"]}>
-          <BacklogSection boardId={activeBoard[0].id} />
-          <ProgressSection boardId={activeBoard[0].id} />
-          <ReviewSection boardId={activeBoard[0].id} />
-          <CompletedSection boardId={activeBoard[0].id} />
-        </section>
+        <>
+          <Sidebar />
+          <MainContainer>
+            <section className={styles["tasks-container"]}>
+              <BacklogSection boardId={activeBoard[0].id} />
+              <ProgressSection boardId={activeBoard[0].id} />
+              <ReviewSection boardId={activeBoard[0].id} />
+              <CompletedSection boardId={activeBoard[0].id} />
+            </section>
+          </MainContainer>
+        </>
       )}
-    </MainContainer>
+    </>
   );
 }

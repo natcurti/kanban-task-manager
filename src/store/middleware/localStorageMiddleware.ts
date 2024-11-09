@@ -9,12 +9,14 @@ import {
 import { IRootState } from "..";
 import { LocalStorage } from "@/utils/LocalStorage";
 import { setColorMode } from "../reducers/colorMode";
+import { loadInitialBoards } from "../reducers/boards";
 
 export const listener = createListenerMiddleware();
 
 listener.startListening({
   matcher: isAnyOf(
     loadInitialTasks,
+    loadInitialBoards,
     addTask,
     dropTask,
     updateTask,
@@ -35,6 +37,8 @@ listener.startListening({
       case setColorMode.type:
         LocalStorage.setItemOnStorage("theme", store.colorMode);
         break;
+      case loadInitialBoards.type:
+        LocalStorage.setItemOnStorage("boards", JSON.stringify(store.boards));
       default:
         break;
     }
