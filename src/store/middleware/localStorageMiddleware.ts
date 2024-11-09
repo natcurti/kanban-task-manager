@@ -2,6 +2,7 @@ import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import {
   addTask,
   deleteTask,
+  dropTask,
   loadInitialTasks,
   updateTask,
 } from "../reducers/tasks";
@@ -15,6 +16,7 @@ listener.startListening({
   matcher: isAnyOf(
     loadInitialTasks,
     addTask,
+    dropTask,
     updateTask,
     deleteTask,
     setColorMode
@@ -25,6 +27,7 @@ listener.startListening({
     switch (action.type) {
       case loadInitialTasks.type:
       case addTask.type:
+      case dropTask.type:
       case updateTask.type:
       case deleteTask.type:
         LocalStorage.setItemOnStorage("tasks", JSON.stringify(store.tasks));

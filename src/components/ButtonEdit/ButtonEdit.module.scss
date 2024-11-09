@@ -8,6 +8,8 @@
   border-radius: 50%;
 
   &:hover {
-    outline: 2px solid var(--blue);
+    svg {
+      fill: var(--blue);
+    }
   }
 }
