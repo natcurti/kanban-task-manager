@@ -7,6 +7,7 @@ import tasksSlice from "./reducers/tasks";
 import boardsSlice from "./reducers/boards";
 import selectedTaskSlice from "./reducers/selectedTask";
 import taskToEditSlice from "./reducers/taskToEdit";
+import boardToEditSlice from "./reducers/boardToEdit";
 import { listener } from "./middleware/localStorageMiddleware";
 
 export const makeStore = () => {
@@ -20,6 +21,7 @@ export const makeStore = () => {
       boards: boardsSlice,
       selectedTask: selectedTaskSlice,
       taskToEdit: taskToEditSlice,
+      boardToEdit: boardToEditSlice,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(listener.middleware),
