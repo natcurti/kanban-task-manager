@@ -25,19 +25,14 @@
   border-radius: 2.813rem;
 }
 
-.link,
-.addBoard {
+.link {
   display: flex;
   align-items: center;
   color: var(--white);
-}
-
-.link {
   text-decoration: none;
 }
 
-.link-light,
-.addBoard-light {
+.link-light {
   color: var(--black);
 }
 
@@ -49,10 +44,9 @@
 }
 
 .title {
-  width: 100%;
+  max-width: 65%;
   display: flex;
   align-items: center;
-  gap: 3.5rem;
   position: absolute;
   left: 10rem;
   opacity: 0;
@@ -62,12 +56,4 @@
 .title-opened {
   opacity: 1;
   left: 4rem;
-}
-
-.btn-edit-board {
-  display: grid;
-  place-items: center;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
 }

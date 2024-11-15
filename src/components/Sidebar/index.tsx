@@ -2,38 +2,28 @@
 import classNames from "classnames";
 import styles from "./Sidebar.module.scss";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { AddBoardIcon, CloseIcon, MenuIcon } from "../Icons";
+import { CloseIcon, MenuIcon } from "../Icons";
 import { setIsOpen } from "@/store/reducers/navBar";
-import NavbarItem from "./NavbarItem";
 import SwitchTheme from "../SwitchTheme";
 import { createSelector } from "@reduxjs/toolkit";
-import { setModalBoardOpen } from "@/store/reducers/modalBoard";
 import { useRef } from "react";
-import BoardLogo from "../BoardLogo";
-import { IBoard } from "@/types/IBoard";
 import ModalNewBoard from "../ModalNewBoard";
-import { turnBoardActive } from "@/store/reducers/boards";
-import ButtonEdit from "../ButtonEdit";
+import NavList from "./NavList";
 
 const Sidebar = () => {
-  const { isNavbarOpen, theme, isModalOpen, boards } = useAppSelector(
+  const { isNavbarOpen, theme, isModalOpen } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
         isNavbarOpen: store.navBar,
         theme: store.colorMode,
         isModalOpen: store.modalBoard,
-        boards: store.boards,
       })
     )
   );
+
   const overlayRef = useRef<HTMLDivElement>(null);
-
   const dispatch = useAppDispatch();
-
-  const selectBoard = (boardName: string) => {
-    dispatch(turnBoardActive(boardName));
-  };
 
   const handleClickOverlay = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -43,10 +33,6 @@ const Sidebar = () => {
     } else {
       e.stopPropagation();
     }
-  };
-
-  const handleEditBoard = (board: IBoard) => {
-    dispatch(setModalBoardOpen());
   };
 
   return (
@@ -77,39 +63,7 @@ const Sidebar = () => {
                 <MenuIcon colorMode={theme} />
               )}
             </button>
-            <ul className={styles["container-buttons"]}>
-              {boards.map((board: IBoard) => (
-                <div key={board.id} className={styles["container-nav-item"]}>
-                  <NavbarItem
-                    title={board.name}
-                    isOpen={isNavbarOpen}
-                    isActive={board.isActive}
-                    href={board.slug}
-                    onClick={() => selectBoard(board.name)}
-                  >
-                    <BoardLogo color="#F8D8B0" src={board.icon} />
-                  </NavbarItem>
-                  <span
-                    className={classNames(styles["btn-edit"], {
-                      [styles["btn-edit-open"]]: isNavbarOpen,
-                    })}
-                  >
-                    <ButtonEdit
-                      colorMode={theme}
-                      onClick={() => handleEditBoard(board)}
-                    />
-                  </span>
-                </div>
-              ))}
-
-              <NavbarItem
-                title="Add new board"
-                isOpen={isNavbarOpen}
-                onClick={() => dispatch(setModalBoardOpen())}
-              >
-                <AddBoardIcon colorMode={theme} />
-              </NavbarItem>
-            </ul>
+            <NavList colorMode={theme} isOpen={isNavbarOpen} />
           </div>
           <SwitchTheme isOpen={isNavbarOpen} />
         </nav>

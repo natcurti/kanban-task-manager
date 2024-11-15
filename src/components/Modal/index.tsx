@@ -5,9 +5,10 @@ import styles from "./Modal.module.scss";
 import React, { useRef } from "react";
 import classNames from "classnames";
 import { setModalTaskOpen } from "@/store/reducers/modalTask";
-import { ModalType } from "@/types/ModalType";
+import { ModalType } from "@/types/modalType";
 import { setModalBoardOpen } from "@/store/reducers/modalBoard";
 import { clearTaskToEdit } from "@/store/reducers/taskToEdit";
+import { clearBoardToEdit } from "@/store/reducers/boardToEdit";
 
 interface IModal {
   title: string;
@@ -29,6 +30,7 @@ const Modal = ({ title, children, type }: IModal) => {
         dispatch(clearTaskToEdit());
       } else {
         dispatch(setModalBoardOpen());
+        dispatch(clearBoardToEdit());
       }
     } else {
       e.stopPropagation();
@@ -41,6 +43,7 @@ const Modal = ({ title, children, type }: IModal) => {
       dispatch(clearTaskToEdit());
     } else {
       dispatch(setModalBoardOpen());
+      dispatch(clearBoardToEdit());
     }
   };
 

@@ -1,5 +1,5 @@
 "use client";
-import { ModalType } from "@/types/ModalType";
+import { ModalType } from "@/types/modalType";
 import Modal from "../Modal";
 import styles from "./ModalNewTask.module.scss";
 import TaskCover from "../TaskCover";
@@ -7,7 +7,7 @@ import InputName from "../ModalComponents/InputName";
 import SelectStatus from "../ModalComponents/SelectStatus";
 import SelectTags from "../ModalComponents/SelectTags";
 import Button from "../Button";
-import { ButtonType } from "@/types/ButtonType";
+import { ButtonType } from "@/types/buttonType";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { z } from "zod";
@@ -138,7 +138,7 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
             />
           </div>
           <Button
-            title="Deletar tarefa"
+            title="Delete Task"
             btnStyle={ButtonType.delete}
             type="button"
             disabled={taskToEdit.length === 0}

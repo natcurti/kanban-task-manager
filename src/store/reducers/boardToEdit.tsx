@@ -10,10 +10,10 @@ const boardToEditSlice = createSlice({
     selectBoardToEdit: (state, { payload }) => {
       state.push(payload);
     },
-    cleanBoardToEdit: () => initialState,
+    clearBoardToEdit: () => initialState,
   },
 });
 
-export const { selectBoardToEdit, cleanBoardToEdit } = boardToEditSlice.actions;
+export const { selectBoardToEdit, clearBoardToEdit } = boardToEditSlice.actions;
 
 export default boardToEditSlice.reducer;

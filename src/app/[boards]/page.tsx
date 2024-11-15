@@ -7,15 +7,16 @@ import ReviewSection from "@/components/Sections/ReviewSection";
 import ProgressSection from "@/components/Sections/ProgressSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createSelector } from "@reduxjs/toolkit";
-import { IBoard } from "@/types/IBoard";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { LocalStorage } from "@/utils/LocalStorage";
 import { loadInitialTasks } from "@/store/reducers/tasks";
 import { defaultTasks } from "@/store/defaultTasks";
 import Loader from "@/components/Loader";
-import Sidebar from "@/components/Sidebar";
 import { defaultBoard } from "@/store/defaultBoard";
 import { loadInitialBoards } from "@/store/reducers/boards";
+import { IBoard } from "@/types/IBoard";
+import { setBoardsLoaded, setTasksLoaded } from "@/store/reducers/dataLoaded";
+import Sidebar from "@/components/Sidebar";
 
 interface IBoardParams {
   params: {
@@ -26,41 +27,53 @@ interface IBoardParams {
 export default function Board({ params }: IBoardParams) {
   const [isLoading, setIsLoading] = useState(true);
 
-  const { activeBoard } = useAppSelector(
+  const { activeBoard, dataLoaded } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
         activeBoard: store.boards.filter(
           (board: IBoard) => board.slug === params.boards
         ),
+        dataLoaded: store.dataLoaded,
       })
     )
   );
+
   const dispatch = useAppDispatch();
 
-  const getTasks = useMemo(() => {
-    const tasks = LocalStorage.getItemFromStorage("tasks");
-    if (tasks) {
-      const parsedTasks = JSON.parse(tasks);
-      dispatch(loadInitialTasks(parsedTasks));
-    } else {
-      dispatch(loadInitialTasks(defaultTasks));
+  useEffect(() => {
+    if (!dataLoaded.tasksLoaded) {
+      const tasks = LocalStorage.getItemFromStorage("tasks");
+      if (tasks) {
+        const parsedTasks = JSON.parse(tasks);
+        dispatch(loadInitialTasks(parsedTasks));
+      } else {
+        dispatch(loadInitialTasks(defaultTasks));
+      }
+      dispatch(setTasksLoaded());
     }
-  }, [dispatch]);
-
-  const getBoards = useMemo(() => {
-    const boards = LocalStorage.getItemFromStorage("boards");
-    if (boards) {
-      const parsedBoards = JSON.parse(boards);
-      dispatch(loadInitialBoards(parsedBoards));
-    } else {
-      dispatch(loadInitialBoards(defaultBoard));
-    }
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    setIsLoading(false);
-  }, [getTasks, getBoards]);
+    if (!dataLoaded.boardsLoaded) {
+      const boards = LocalStorage.getItemFromStorage("boards");
+      if (boards) {
+        const parsedBoards = JSON.parse(boards);
+        dispatch(loadInitialBoards(parsedBoards));
+      } else {
+        dispatch(loadInitialBoards(defaultBoard));
+      }
+      dispatch(setBoardsLoaded());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (dataLoaded.boardsLoaded && dataLoaded.tasksLoaded) {
+      setIsLoading(false);
+    }
+  }, [dataLoaded]);
 
   return (
     <>
@@ -69,7 +82,7 @@ export default function Board({ params }: IBoardParams) {
           <Loader />
         </div>
       ) : (
-        <>
+        <div>
           <Sidebar />
           <MainContainer>
             <section className={styles["tasks-container"]}>
@@ -79,7 +92,7 @@ export default function Board({ params }: IBoardParams) {
               <CompletedSection boardId={activeBoard[0].id} />
             </section>
           </MainContainer>
-        </>
+        </div>
       )}
     </>
   );

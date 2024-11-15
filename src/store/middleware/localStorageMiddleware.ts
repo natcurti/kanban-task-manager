@@ -9,19 +9,27 @@ import {
 import { IRootState } from "..";
 import { LocalStorage } from "@/utils/LocalStorage";
 import { setColorMode } from "../reducers/colorMode";
-import { loadInitialBoards } from "../reducers/boards";
+import {
+  addBoard,
+  deleteBoard,
+  loadInitialBoards,
+  updateBoard,
+} from "../reducers/boards";
 
 export const listener = createListenerMiddleware();
 
 listener.startListening({
   matcher: isAnyOf(
     loadInitialTasks,
-    loadInitialBoards,
     addTask,
     dropTask,
     updateTask,
     deleteTask,
-    setColorMode
+    setColorMode,
+    loadInitialBoards,
+    addBoard,
+    updateBoard,
+    deleteBoard
   ),
   effect: (action, { getState }) => {
     const store: IRootState = getState() as IRootState;
@@ -38,6 +46,9 @@ listener.startListening({
         LocalStorage.setItemOnStorage("theme", store.colorMode);
         break;
       case loadInitialBoards.type:
+      case addBoard.type:
+      case updateBoard.type:
+      case deleteBoard.type:
         LocalStorage.setItemOnStorage("boards", JSON.stringify(store.boards));
       default:
         break;

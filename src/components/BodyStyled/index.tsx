@@ -14,6 +14,8 @@ const BodyStyled = ({ children }: { children: React.ReactNode }) => {
     const theme = LocalStorage.getItemFromStorage("theme");
     if (theme) {
       dispatch(setColorMode(theme));
+    } else {
+      dispatch(setColorMode("dark"));
     }
   }, [dispatch]);
 

@@ -1,0 +1,31 @@
+.addBoard {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+
+.addBoard-light {
+  color: var(--black);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.title {
+  max-width: 65%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 10rem;
+  opacity: 0;
+  transition: 1s ease-in-out;
+}
+
+.title-opened {
+  opacity: 1;
+  left: 4rem;
+}

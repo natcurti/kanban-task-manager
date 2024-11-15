@@ -1,0 +1,21 @@
+.container-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.container-nav-item {
+  position: relative;
+}
+
+.btn-edit {
+  display: none;
+}
+
+.btn-edit-open {
+  display: flex;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}

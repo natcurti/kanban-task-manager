@@ -1,20 +1,24 @@
-import { ModalType } from "@/types/ModalType";
+"use client";
+import { ModalType } from "@/types/modalType";
 import Modal from "../Modal";
 import InputName from "../ModalComponents/InputName";
 import BoardLogo from "../BoardLogo";
 import Button from "../Button";
 import styles from "./ModalNewBoard.module.scss";
-import { ButtonType } from "@/types/ButtonType";
-import { useAppDispatch } from "@/store/hooks";
+import { ButtonType } from "@/types/buttonType";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setModalBoardOpen } from "@/store/reducers/modalBoard";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessage from "../ErrorMessage";
 import { useEffect, useState } from "react";
-import { addBoard } from "@/store/reducers/boards";
+import { addBoard, deleteBoard, updateBoard } from "@/store/reducers/boards";
 import { v4 as uuidv4 } from "uuid";
 import { createSlug } from "@/utils/createSlug";
+import { createSelector } from "@reduxjs/toolkit";
+import { clearBoardToEdit } from "@/store/reducers/boardToEdit";
+import { useRouter } from "next/navigation";
 
 const logos = [
   {
@@ -52,6 +56,15 @@ const schema = z.object({
 type ModalValues = z.infer<typeof schema>;
 
 const ModalNewBoard = () => {
+  const { boardToEdit } = useAppSelector(
+    createSelector(
+      (store) => store,
+      (store) => ({
+        boardToEdit: store.boardToEdit,
+      })
+    )
+  );
+
   const {
     register,
     handleSubmit,
@@ -59,32 +72,48 @@ const ModalNewBoard = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<ModalValues>({
     defaultValues: {
-      boardName: "",
-      boardIcon: "",
+      boardName: boardToEdit.length > 0 ? boardToEdit[0].name : "",
+      boardIcon: boardToEdit.length > 0 ? boardToEdit[0].icon : "",
     },
     mode: "onSubmit",
     resolver: zodResolver(schema),
   });
 
-  const [selectedIcon, setSelectedIcon] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState(
+    boardToEdit.length > 0 ? boardToEdit[0].icon : ""
+  );
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSaveBoard = (values: ModalValues) => {
-    dispatch(
-      addBoard({
-        name: values.boardName,
-        id: uuidv4(),
-        icon: values.boardIcon,
-        slug: createSlug(values.boardName),
-        isActive: false,
-      })
-    );
+    const boardDetails = {
+      name: values.boardName,
+      id: boardToEdit.length > 0 ? boardToEdit[0].id : uuidv4(),
+      icon: values.boardIcon,
+      isActive: true,
+      slug: createSlug(values.boardName),
+    };
+
+    if (boardToEdit.length > 0) {
+      dispatch(updateBoard(boardDetails));
+      dispatch(clearBoardToEdit());
+    } else {
+      dispatch(addBoard(boardDetails));
+    }
     dispatch(setModalBoardOpen());
+    router.push(`/${boardDetails.slug}`);
   };
 
   const cancelBoard = () => {
     dispatch(setModalBoardOpen());
+    dispatch(clearBoardToEdit());
     reset();
+  };
+
+  const handleDeleteBoard = () => {
+    dispatch(deleteBoard(boardToEdit));
+    dispatch(setModalBoardOpen());
+    dispatch(clearBoardToEdit());
   };
 
   useEffect(() => {
@@ -94,7 +123,10 @@ const ModalNewBoard = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <Modal title="New board" type={ModalType.newBoard}>
+    <Modal
+      title={boardToEdit.length > 0 ? "Edit board" : "New Board"}
+      type={ModalType.newBoard}
+    >
       <form onSubmit={handleSubmit(handleSaveBoard)}>
         <InputName
           title="Board Name"
@@ -133,7 +165,7 @@ const ModalNewBoard = () => {
         )}
         <div className={styles["container-buttons"]}>
           <Button
-            title="Create board"
+            title={boardToEdit.length > 0 ? "Save board" : "Create Board"}
             btnStyle={ButtonType.save}
             type="submit"
           />
@@ -142,6 +174,13 @@ const ModalNewBoard = () => {
             btnStyle={ButtonType.cancel}
             onClick={cancelBoard}
             type="button"
+          />
+          <Button
+            title="Delete Board"
+            btnStyle={ButtonType.delete}
+            type="button"
+            disabled={boardToEdit.length === 0 || boardToEdit[0].id === "1"}
+            onClick={handleDeleteBoard}
           />
         </div>
       </form>

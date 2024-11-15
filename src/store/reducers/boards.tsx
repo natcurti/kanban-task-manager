@@ -13,19 +13,18 @@ const boardsSlice = createSlice({
     addBoard: (state, { payload }) => {
       state.push(payload);
     },
-    turnBoardActive: (state, { payload }) => {
-      state.forEach((board) => {
-        if (board.name === payload) {
-          board.isActive = true;
-        } else {
-          board.isActive = false;
-        }
-      });
+    updateBoard: (state, { payload }) => {
+      const boardIndex = state.findIndex((board) => board.id === payload.id);
+      state.splice(boardIndex, 1, payload);
+    },
+    deleteBoard: (state, { payload }) => {
+      const boardIndex = state.findIndex((board) => board.id === payload.id);
+      state.splice(boardIndex, 1);
     },
   },
 });
 
-export const { addBoard, turnBoardActive, loadInitialBoards } =
+export const { addBoard, loadInitialBoards, updateBoard, deleteBoard } =
   boardsSlice.actions;
 
 export default boardsSlice.reducer;
