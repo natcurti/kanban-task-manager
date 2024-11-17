@@ -7,7 +7,7 @@ import { setIsOpen } from "@/store/reducers/navBar";
 import SwitchTheme from "../SwitchTheme";
 import { createSelector } from "@reduxjs/toolkit";
 import { useRef } from "react";
-import ModalNewBoard from "../ModalNewBoard";
+import ModalBoard from "../ModalBoard";
 import NavList from "./NavList";
 
 const Sidebar = () => {
@@ -68,7 +68,7 @@ const Sidebar = () => {
           <SwitchTheme isOpen={isNavbarOpen} />
         </nav>
       </div>
-      {isModalOpen && <ModalNewBoard />}
+      {isModalOpen && <ModalBoard />}
     </>
   );
 };

@@ -4,7 +4,7 @@ import Modal from "../Modal";
 import InputName from "../ModalComponents/InputName";
 import BoardLogo from "../BoardLogo";
 import Button from "../Button";
-import styles from "./ModalNewBoard.module.scss";
+import styles from "./ModalBoard.module.scss";
 import { ButtonType } from "@/types/buttonType";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setModalBoardOpen } from "@/store/reducers/modalBoard";
@@ -55,12 +55,13 @@ const schema = z.object({
 
 type ModalValues = z.infer<typeof schema>;
 
-const ModalNewBoard = () => {
-  const { boardToEdit } = useAppSelector(
+const ModalBoard = () => {
+  const { boardToEdit, boards } = useAppSelector(
     createSelector(
       (store) => store,
       (store) => ({
         boardToEdit: store.boardToEdit,
+        boards: store.boards,
       })
     )
   );
@@ -90,7 +91,6 @@ const ModalNewBoard = () => {
       name: values.boardName,
       id: boardToEdit.length > 0 ? boardToEdit[0].id : uuidv4(),
       icon: values.boardIcon,
-      isActive: true,
       slug: createSlug(values.boardName),
     };
 
@@ -111,9 +111,12 @@ const ModalNewBoard = () => {
   };
 
   const handleDeleteBoard = () => {
-    dispatch(deleteBoard(boardToEdit));
-    dispatch(setModalBoardOpen());
-    dispatch(clearBoardToEdit());
+    if (boards[0].id !== boardToEdit.id) {
+      dispatch(deleteBoard(boardToEdit));
+      dispatch(setModalBoardOpen());
+      dispatch(clearBoardToEdit());
+      router.push(`/${boards[0].slug}`);
+    }
   };
 
   useEffect(() => {
@@ -188,4 +191,4 @@ const ModalNewBoard = () => {
   );
 };
 
-export default ModalNewBoard;
+export default ModalBoard;

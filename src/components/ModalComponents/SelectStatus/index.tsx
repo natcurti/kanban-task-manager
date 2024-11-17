@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import classNames from "classnames";
 import { Control, Controller } from "react-hook-form";
-import { ModalValues } from "@/components/ModalNewTask";
+import { ModalValues } from "@/components/ModalTask";
 import { createSelector } from "@reduxjs/toolkit";
 
 interface ISelectStatus {

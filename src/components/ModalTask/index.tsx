@@ -1,7 +1,7 @@
 "use client";
 import { ModalType } from "@/types/modalType";
 import Modal from "../Modal";
-import styles from "./ModalNewTask.module.scss";
+import styles from "./ModalTask.module.scss";
 import TaskCover from "../TaskCover";
 import InputName from "../ModalComponents/InputName";
 import SelectStatus from "../ModalComponents/SelectStatus";
@@ -31,7 +31,7 @@ const schema = z.object({
 
 export type ModalValues = z.infer<typeof schema>;
 
-const ModalNewTask = ({ boardId }: { boardId: string }) => {
+const ModalTask = ({ boardId }: { boardId: string }) => {
   const [urlCover, setUrlCover] = useState("");
   const { taskToEdit } = useAppSelector(
     createSelector(
@@ -150,4 +150,4 @@ const ModalNewTask = ({ boardId }: { boardId: string }) => {
   );
 };
 
-export default ModalNewTask;
+export default ModalTask;

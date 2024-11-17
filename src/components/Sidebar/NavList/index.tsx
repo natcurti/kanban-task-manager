@@ -41,26 +41,27 @@ const NavList = ({ colorMode, isOpen }: INavList) => {
 
   return (
     <ul className={styles["container-buttons"]}>
-      {boards.map((board: IBoard) => (
-        <div key={board.id} className={styles["container-nav-item"]}>
-          <NavItem
-            isOpen={isOpen}
-            isActive={board.slug === pathname}
-            colorMode={colorMode}
-            board={board}
-          />
-          <span
-            className={classNames(styles["btn-edit"], {
-              [styles["btn-edit-open"]]: isOpen,
-            })}
-          >
-            <ButtonEdit
+      {boards.length > 0 &&
+        boards.map((board: IBoard) => (
+          <div key={board.id} className={styles["container-nav-item"]}>
+            <NavItem
+              isOpen={isOpen}
+              isActive={board.slug === pathname}
               colorMode={colorMode}
-              onClick={() => handleEditBoard(board)}
+              board={board}
             />
-          </span>
-        </div>
-      ))}
+            <span
+              className={classNames(styles["btn-edit"], {
+                [styles["btn-edit-open"]]: isOpen,
+              })}
+            >
+              <ButtonEdit
+                colorMode={colorMode}
+                onClick={() => handleEditBoard(board)}
+              />
+            </span>
+          </div>
+        ))}
       <div className={styles["container-nav-item"]}>
         <AddNewBoard isOpen={isOpen} colorMode={colorMode} />
       </div>

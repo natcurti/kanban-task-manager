@@ -3,5 +3,4 @@ export interface IBoard {
   id: string;
   icon: string;
   slug: string;
-  isActive: boolean;
 }

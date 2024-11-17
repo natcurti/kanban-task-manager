@@ -3,7 +3,7 @@ import { useAppSelector } from "@/store/hooks";
 import styles from "./MainContainer.module.scss";
 import classNames from "classnames";
 import { createSelector } from "@reduxjs/toolkit";
-import ModalNewTask from "../ModalNewTask";
+import ModalTask from "../ModalTask";
 import { usePathname } from "next/navigation";
 import { IBoard } from "@/types/IBoard";
 
@@ -34,7 +34,7 @@ const MainContainer = ({ children }: IMainContainer) => {
       })}
     >
       {children}
-      {isModalOpen && <ModalNewTask boardId={activeBoard[0].id} />}
+      {isModalOpen && <ModalTask boardId={activeBoard[0].id} />}
     </main>
   );
 };
