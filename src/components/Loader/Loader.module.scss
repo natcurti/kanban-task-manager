@@ -51,3 +51,10 @@
     transform: rotate(360deg);
   }
 }
+
+.container-loader {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
