@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📋 Kanban Task Manager
 
-## Getting Started
+Gerenciador de tarefas estilo Kanban. O projeto possui algumas tarefas padrão já adicionadas que podem ser removidas. Você pode adicionar novas tarefas, editar as tarefas já existentes ou deletá-las. É possível escolher o status de cada uma, tags relacionadas e colocar uma capa, que é obtida de forma aleatória da API Unsplash.
+Você também pode criar diversas boards cada uma com suas respectivas tarefas. Todas as tarefas e boards são armazenadas no local storage.
 
-First, run the development server:
+## 💻 Tecnologias utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next 14
+- TypeScript
+- SASS e CSS Modules
+- Redux Toolkit
+- React Hook Forms
+
+## 🚀 Instalação
+
+Após clonar o projeto, acesse o diretório e digite o comando abaixo para instalar as dependências necessárias:
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Depois você pode rodar a aplicação com o comando:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Variáveis de Ambiente
 
-## Learn More
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env:
 
-To learn more about Next.js, take a look at the following resources:
+`NEXT_PUBLIC_UNSPLASH_API_KEY`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+É preciso usar a sua chave da API Unsplash.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👇 Confira o projeto pelo link:
