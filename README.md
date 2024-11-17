@@ -34,3 +34,5 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 É preciso usar a sua chave da API Unsplash.
 
 ## 👇 Confira o projeto pelo link:
+
+https://kanban-task-manager-3l4l0ug86-natcurtis-projects.vercel.app/
