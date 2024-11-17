@@ -61,8 +61,9 @@ const NavList = ({ colorMode, isOpen }: INavList) => {
           </span>
         </div>
       ))}
-
-      <AddNewBoard isOpen={isOpen} colorMode={colorMode} />
+      <div className={styles["container-nav-item"]}>
+        <AddNewBoard isOpen={isOpen} colorMode={colorMode} />
+      </div>
     </ul>
   );
 };

@@ -15,8 +15,9 @@ const AddNewBoard = ({ colorMode, isOpen }: IAddNewBoard) => {
   return (
     <li
       onClick={() => dispatch(setModalBoardOpen())}
-      className={classNames(styles.addBoard, {
-        [styles["addBoard-light"]]: colorMode === "light",
+      className={classNames(styles.container, {
+        [styles["container-light"]]: colorMode === "light",
+        [styles["container-opened"]]: isOpen,
       })}
     >
       <span className={styles.icon}>

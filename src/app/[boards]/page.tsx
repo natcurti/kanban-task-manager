@@ -82,17 +82,19 @@ export default function Board({ params }: IBoardParams) {
           <Loader />
         </div>
       ) : (
-        <div>
-          <Sidebar />
-          <MainContainer>
-            <section className={styles["tasks-container"]}>
-              <BacklogSection boardId={activeBoard[0].id} />
-              <ProgressSection boardId={activeBoard[0].id} />
-              <ReviewSection boardId={activeBoard[0].id} />
-              <CompletedSection boardId={activeBoard[0].id} />
-            </section>
-          </MainContainer>
-        </div>
+        activeBoard.length > 0 && (
+          <div className={styles["main-container"]}>
+            <Sidebar />
+            <MainContainer>
+              <section className={styles["tasks-container"]}>
+                <BacklogSection boardId={activeBoard[0].id} />
+                <ProgressSection boardId={activeBoard[0].id} />
+                <ReviewSection boardId={activeBoard[0].id} />
+                <CompletedSection boardId={activeBoard[0].id} />
+              </section>
+            </MainContainer>
+          </div>
+        )
       )}
     </>
   );

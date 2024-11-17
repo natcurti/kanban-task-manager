@@ -1,10 +1,26 @@
-.addBoard {
+.container {
+  list-style: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   color: var(--white);
+
+  &:hover {
+    outline: 3px solid var(--blue);
+  }
 }
 
-.addBoard-light {
+.container-opened {
+  width: 100%;
+  border-radius: 2.813rem;
+}
+
+.container-light {
   color: var(--black);
 }
 
@@ -20,12 +36,11 @@
   display: flex;
   align-items: center;
   position: absolute;
-  left: 10rem;
+  left: 4rem;
   opacity: 0;
-  transition: 1s ease-in-out;
+  transition: 1s ease-in;
 }
 
 .title-opened {
   opacity: 1;
-  left: 4rem;
 }
