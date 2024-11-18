@@ -5,18 +5,27 @@
   left: 0;
   width: 100%;
   min-height: 100vh;
+  height: 100%;
+  padding-top: 10rem;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  align-items: start;
+
+  @media (min-width: 640px) {
+    padding-top: 0;
+    place-items: center;
+  }
 }
 
 .modal {
   background-color: var(--dark-gray);
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 0.75rem;
   position: relative;
   width: 90%;
 
   @media (min-width: 640px) {
+    padding: 1.5rem;
     width: 36rem;
   }
 }

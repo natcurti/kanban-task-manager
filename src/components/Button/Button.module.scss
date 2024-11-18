@@ -2,12 +2,21 @@
   border-radius: 2.5rem;
   height: 2.5rem;
   color: var(--white);
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
   cursor: pointer;
+  width: 33%;
+  font-size: 0.75rem;
+
+  @media (min-width: 640px) {
+    padding: 0.5rem 1.5rem;
+    width: auto;
+    gap: 1rem;
+    font-size: 1rem;
+  }
 }
 
 .btn-save {
